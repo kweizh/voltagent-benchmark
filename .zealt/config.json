@@ -1,0 +1,5 @@
+{
+  "title": "Voltagent Benchmark",
+  "description": "Performance results of AI coding models on Voltagent tasks, measuring success rate and execution time with high precision.",
+  "github_repo": "https://github.com/kweizh/voltagent-benchmark"
+}
