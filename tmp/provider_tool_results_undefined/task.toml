@@ -1,0 +1,13 @@
+
+[task]
+name = "voltagent_provider_tool_results_undefined"
+description = "Fix undefined toolCalls and toolResults for Google Gemini"
+
+[environment]
+image = "voltagent_provider_tool_results_undefined_env"
+build_context = "environment"
+dockerfile = "Dockerfile"
+
+[tests]
+initial_state = "bootstrap/test_initial_state.py"
+final_state = "test/test_final_state.py"
