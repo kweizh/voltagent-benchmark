@@ -1,5 +1,267 @@
 1:"$Sreact.fragment"
-2:I[75049,["/voltagent-benchmark/_next/static/chunks/d2c13bb33c4fcd54.js","/voltagent-benchmark/_next/static/chunks/c21188132e0e0d48.js"],"OutletBoundary"]
-3:"$Sreact.suspense"
-0:{"buildId":"0bbS2LUd7LdHzs0Q5qHFb","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"min-h-screen bg-background text-foreground font-sans selection:bg-primary/20","children":[["$","div",null,{"className":"fixed inset-0 -z-10 h-full w-full bg-background bg-[radial-gradient(#2a2a2a_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20 dark:opacity-40"}],["$","div",null,{"className":"container mx-auto px-4 sm:px-8 lg:px-12 py-8 max-w-screen-2xl h-[100dvh] flex flex-col overflow-hidden","children":[["$","div",null,{"className":"mb-6 space-y-4 shrink-0","children":[["$","div",null,{"className":"flex items-center gap-4","children":["$","a",null,{"href":"/","className":"text-sm text-muted-foreground hover:text-foreground transition-colors","children":"← Back to Leaderboard"}]}],["$","div",null,{"children":["$","h1",null,{"className":"text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50","children":"Task"}]}]]}],["$","div",null,{"className":"relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-card/90 to-background/90 px-5 pb-10 pt-6 text-center shadow-[0_0_0_1px_hsl(var(--primary)/0.18),0_28px_72px_-32px_hsl(var(--foreground)/0.45)] backdrop-blur-sm sm:px-8 sm:pb-14 sm:pt-8","children":[["$","div",null,{"className":"pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-primary/20 blur-3xl sm:-right-14 sm:-top-14 sm:h-40 sm:w-40"}],["$","div",null,{"className":"pointer-events-none absolute -left-20 bottom-0 h-32 w-32 rounded-full bg-foreground/10 blur-3xl sm:h-36 sm:w-36"}],["$","div",null,{"className":"relative mx-auto mb-8 inline-flex items-center rounded-full border border-primary/40 bg-primary/15 px-3 py-1 text-xs font-semibold tracking-[0.12em] text-foreground sm:text-sm sm:tracking-[0.16em]","children":"⏳ PIPELINE PENDING REVIEW"}],["$","p",null,{"className":"relative mx-auto max-w-2xl px-4 text-center text-lg font-semibold tracking-wide text-foreground sm:px-5 sm:text-xl","children":[6," sample cases generated — pending review"]}],["$","p",null,{"className":"relative mx-auto mt-2 max-w-2xl px-4 text-left text-sm leading-relaxed text-muted-foreground sm:px-5","children":"Your sample cases are ready. Before moving forward, we do a quick review together to make sure everything looks right and aligns with real-world usage."}],["$","div",null,{"className":"relative mx-auto mt-8 max-w-2xl rounded-xl bg-primary/10 px-4 py-4 text-left sm:px-5","children":[["$","p",null,{"className":"text-base font-semibold text-foreground sm:text-lg text-center","children":"Next step: join Slack for review"}],["$","p",null,{"className":"mt-1 text-sm leading-relaxed text-muted-foreground","children":"We've sent you a Slack invitation to your registered email with Zealt. Please join and we'll walk through the next step together."}],["$","p",null,{"className":"mt-3 text-xs text-muted-foreground","children":["If you don't see it, just reach out at"," ",["$","a",null,{"href":"mailto:zealtdev@tabbyml.com","className":"font-normal text-foreground underline decoration-primary/60 underline-offset-4 hover:text-primary transition-colors","children":"zealtdev@tabbyml.com"}],"."]}]]}]]}]]}]]}],[["$","script","script-0",{"src":"/voltagent-benchmark/_next/static/chunks/aa2ff1d395e3be60.js","async":true}],["$","script","script-1",{"src":"/voltagent-benchmark/_next/static/chunks/be08138953094657.js","async":true}]],["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
-4:null
+2:I[42654,["/voltagent-benchmark/_next/static/chunks/ca023ad85cd7aeee.js","/voltagent-benchmark/_next/static/chunks/2ad5122eae704b1a.js","/voltagent-benchmark/_next/static/chunks/aa2ff1d395e3be60.js","/voltagent-benchmark/_next/static/chunks/be08138953094657.js"],"TasksPageClient"]
+11:I[75049,["/voltagent-benchmark/_next/static/chunks/d2c13bb33c4fcd54.js","/voltagent-benchmark/_next/static/chunks/c21188132e0e0d48.js"],"OutletBoundary"]
+12:"$Sreact.suspense"
+3:T59e,# VoltAgent A2A Protocol Server
+
+## Background
+VoltAgent is a TypeScript framework for orchestrating AI agents. Your task is to build a complex Agent-to-Agent (A2A) protocol server using VoltAgent and Hono. The server will orchestrate communication between two specialized agents.
+
+## Requirements
+- Initialize a Node.js project in `/home/user/agent-server`.
+- Install `@voltagent/core`, `@voltagent/server-hono`, `@ai-sdk/openai`, `zod`, and `hono`.
+- Create a `server.ts` that sets up a VoltAgent instance with a Hono server.
+- Define two agents: `receiver` and `processor` using `gpt-4o-mini`.
+- The `receiver` agent should be responsible for extracting a structured JSON payload from incoming text.
+- The `processor` agent should analyze the extracted payload and generate a summary.
+- Create a workflow chain that connects `receiver` to `processor`.
+- Expose an endpoint `/api/process` that triggers this workflow.
+
+## Implementation Guide
+1. Run `npm init -y` and install the required dependencies.
+2. In `server.ts`, define the agents and the workflow using `createWorkflowChain` and `andAgent`.
+3. Configure `VoltAgent` with the `honoServer()` and register the workflow.
+4. Start the server on port 3000.
+
+## Constraints
+- Project path: /home/user/agent-server
+- Start command: `npx tsx server.ts`
+- Port: 3000
+- The server must run continuously when started.
+- Use the OPENAI_API_KEY environment variable.
+
+## Integrations
+- None4:T6f0,# Agent Hooks Observability
+
+## Background
+VoltAgent provides Agent Hooks to intercept specific points in the agent execution pipeline for observability, logging, and behavior modification. You need to create an agent that uses these hooks to log its execution stages to a file.
+
+## Requirements
+- Initialize a Node.js project in `/home/user/app`.
+- Install `@voltagent/core`, `@voltagent/xsai`, and `zod`.
+- Create a tool named `calculate_sum` that takes two numbers `a` and `b` and returns their sum.
+- Create an agent using `XSAIProvider` (with model `gpt-4o-mini`) and configure it with the `calculate_sum` tool.
+- Configure the agent with the following hooks, each appending a specific string to `/home/user/app/hooks.log` (including a newline):
+  - `onStart`: Append `HOOK: onStart\n`
+  - `onToolStart`: Append `HOOK: onToolStart - calculate_sum\n`
+  - `onToolEnd`: Append `HOOK: onToolEnd - calculate_sum\n`
+  - `onEnd`: Append `HOOK: onEnd\n`
+- Write a script `index.js` that initializes this agent and calls `agent.generateText({ prompt: "Calculate the sum of 15 and 27" })`.
+- Run the script so that the agent executes the tool and triggers the hooks.
+
+## Implementation Guide
+1. `mkdir -p /home/user/app && cd /home/user/app`
+2. `npm init -y`
+3. `npm install @voltagent/core @voltagent/xsai zod`
+4. Create `index.js` with the agent definition, tool definition, and hook configuration.
+5. Ensure `OPENAI_API_KEY` is passed from the environment to `XSAIProvider`.
+6. Run `node index.js` to generate the log file.
+
+## Constraints
+- Project path: `/home/user/app`
+- Log file: `/home/user/app/hooks.log`
+- Use `fs.appendFileSync` or similar to write to the log file.
+- Do not hardcode the sum result; let the agent use the tool to calculate it.
+
+## Integrations
+- OpenAI5:T4c2,# VoltAgent Custom Tool with Zod
+
+## Background
+VoltAgent provides a code-first approach to agent development. You need to create a simple Node.js script that defines a custom tool with Zod schema descriptions and invokes an agent to use it.
+
+## Requirements
+- Initialize a project in `/home/user/agent-app`.
+- Install `@voltagent/core`, `zod`, and `@ai-sdk/openai`.
+- Create `index.js` that defines a `get_weather` tool using `createTool` from `@voltagent/core`.
+- The tool parameters must use `z.describe()` for all fields (e.g., `city: z.string().describe("The name of the city")`).
+- Create an `Agent` using the `openai("gpt-4o-mini")` model and the `get_weather` tool.
+- The script should invoke the agent with the prompt "What is the weather in London?" and save the resulting JSON to `/home/user/agent-app/output.json`.
+
+## Implementation Guide
+1. `mkdir -p /home/user/agent-app && cd /home/user/agent-app`
+2. `npm init -y`
+3. `npm install @voltagent/core zod @ai-sdk/openai`
+4. Write `index.js` to create the tool and agent, run the agent, and write the output to `output.json`.
+
+## Constraints
+- Project path: /home/user/agent-app
+- Log file: /home/user/agent-app/output.json
+- Start command: `node index.js`
+6:T474,# VoltAgent Custom REST API RAG
+
+## Background
+VoltAgent provides a `BaseRetriever` class in `@voltagent/core` that can be extended to create custom RAG retrievers. You have a VoltAgent project initialized at `/home/user/voltagent-project`.
+
+## Requirements
+- Create a `RestApiRetriever` class in `src/retriever.ts` that extends `BaseRetriever` from `@voltagent/core`.
+- The constructor should accept an options object containing `baseUrl: string` and pass any other options to `super()`.
+- Implement the `async retrieve(query: string)` method. It must fetch data from the REST API using `GET ${this.baseUrl}?query=${encodeURIComponent(query)}`.
+- The REST API returns a JSON array of objects with a `text` property (e.g., `[{ text: "doc1" }]`).
+- The `retrieve` method must return an array of objects, where each object has a `text` property containing the document text.
+- Export the `RestApiRetriever` as the default export.
+
+## Constraints
+- Project path: `/home/user/voltagent-project`
+- Use the native `fetch` API.
+- Ensure the code passes the existing test suite. Run `npm test` to verify your implementation.
+
+## Integrations
+- None7:T4a6,# VoltAgent Hono Server with Custom REST API
+
+## Background
+VoltAgent uses `@voltagent/server-hono` to serve its HTTP APIs. It allows developers to register custom REST API routes via the `configureApp` callback.
+
+## Requirements
+- Initialize a Node.js project in `/home/user/voltagent-app`.
+- Install `@voltagent/core` and `@voltagent/server-hono`.
+- Create a simple VoltAgent agent named `testAgent`.
+- Configure the Hono server to listen on port `3000`.
+- Register a custom GET endpoint at `/api/status` that returns `{"status": "running"}`.
+
+## Implementation Guide
+1. Create a directory `/home/user/voltagent-app` and initialize a Node.js project.
+2. Install the required packages: `npm install @voltagent/core @voltagent/server-hono`.
+3. Create an `index.js` file.
+4. Define a basic agent using `Agent` from `@voltagent/core`.
+5. Initialize `VoltAgent` with the agent and `honoServer`.
+6. In `honoServer`, set `port: 3000` and use `configureApp: (app) => { app.get("/api/status", (c) => c.json({ status: "running" })); }` to add the `/api/status` route.
+
+## Constraints
+- Project path: `/home/user/voltagent-app`
+- Start command: `node index.js`
+- Port: `3000`
+
+## Integrations
+- None8:T5a3,# VoltAgent MCP Client Integration
+
+## Background
+VoltAgent supports the Model Context Protocol (MCP) to connect agents to external tools. You need to set up a VoltAgent application that connects to two local MCP servers (a math server and a string manipulation server) using the `stdio` transport, aggregates their tools, and provides them to a single agent.
+
+## Requirements
+- Initialize a Node.js project in `/home/user/app`.
+- Install `@voltagent/core`, `@voltagent/vercel-ai`, `@ai-sdk/openai`, and any required MCP packages.
+- Two MCP servers are already provided in `/home/user/servers`: `math-server.js` and `string-server.js`.
+- Create `/home/user/app/index.js` that:
+  1. Configures an MCP client to connect to both `math-server.js` and `string-server.js` via `stdio` (e.g., using `node /home/user/servers/math-server.js`).
+  2. Retrieves the tools from both servers.
+  3. Creates a VoltAgent `Agent` named `mcp-agent` equipped with these aggregated tools.
+  4. Exposes an async function `runAgent(prompt)` that takes a string prompt, runs the agent using `openai("gpt-4o-mini")`, and returns the text response.
+
+## Constraints
+- Project path: `/home/user/app`
+- MCP Servers path: `/home/user/servers`
+- You must use `stdio` transport for the MCP connections.
+- Export the `runAgent` function from `index.js` so it can be tested.
+- Ensure you handle the asynchronous connection to the MCP servers properly before executing the agent.9:T4ef,# VoltAgent Parallel Workflow
+
+## Background
+VoltAgent is a TypeScript framework for AI agents. You need to build a multi-step workflow using `andAll` to perform parallel analysis of a single input string.
+
+## Requirements
+- You have an empty directory at `/home/user/my-agent-app`.
+- Initialize a Node.js project there and install `@voltagent/core` and `@ai-sdk/openai`.
+- Create an `index.ts` file that exports a workflow named `parallelWorkflow`.
+- The workflow must use `createWorkflowChain()`.
+- It should have an `andAll` step with ID `parallel-analysis` containing at least two parallel steps (e.g. `andAgent` or `andThen`).
+- Provide a script `run.ts` that executes this workflow with an input string and saves the output to `/home/user/my-agent-app/output.json`.
+
+## Implementation Guide
+1. `cd /home/user/my-agent-app`
+2. Run `npm init -y` and `npm install @voltagent/core @ai-sdk/openai typescript @types/node tsx`.
+3. Create `index.ts` with the workflow definition.
+4. Create `run.ts` to execute the workflow and write to `output.json`.
+5. Run `npx tsx run.ts` to generate `output.json`.
+
+## Constraints
+- Project path: /home/user/my-agent-app
+- Log file: /home/user/my-agent-app/output.json
+- The workflow must use `andAll`.
+
+## Integrations
+- OpenAIa:T5b8,# VoltAgent Supervisor Writer-Editor Workflow
+
+## Background
+VoltAgent is an open-source TypeScript framework for building multi-agent systems. You need to create a multi-agent workflow where a Writer agent drafts an article, and an Editor agent reviews and revises it.
+
+## Requirements
+- Create a Writer Agent that takes a topic and writes a short article.
+- Create an Editor Agent that takes a drafted article and improves its grammar, clarity, and tone.
+- Create a workflow using `createWorkflowChain` that chains the Writer and Editor sequentially.
+- Execute the workflow with the topic "The Future of AI" and save the final edited output to `output.txt`.
+
+## Implementation Guide
+1. Initialize a Node.js project in `/home/user/myproject` with TypeScript setup.
+2. Install `@voltagent/core`, `@ai-sdk/openai`, `dotenv`, and `zod`.
+3. Create an `index.ts` file.
+4. Instantiate a Writer Agent and an Editor Agent using `Agent` from `@voltagent/core`.
+   - Use `openai("gpt-4o-mini")` as the model for both.
+5. Build a workflow using `createWorkflowChain()` that first runs the Writer Agent, then passes the result to the Editor Agent.
+6. Run the workflow with the initial input text `"The Future of AI"`.
+7. Write the final output string to `/home/user/myproject/output.txt`.
+
+## Constraints
+- Project path: /home/user/myproject
+- Log file: /home/user/myproject/output.txt
+- You must use `OPENAI_API_KEY` from the environment variables.
+
+## Integrations
+- OpenAIb:T44d,# VoltAgent Tracing Setup
+
+## Background
+You have a basic VoltAgent project in `/home/user/app` with a simple agent responding to user inputs.
+Your task is to enable telemetry so that all LLM calls made by the agent are traced and exported using Vercel AI SDK's OpenTelemetry integration.
+
+## Requirements
+- Install the necessary OpenTelemetry and Vercel AI SDK tracing packages (e.g., `@vercel/otel`, `@opentelemetry/sdk-trace-node`, `@opentelemetry/exporter-trace-otlp-http`).
+- Configure the telemetry in `/home/user/app/index.ts` to export traces to a local OTLP HTTP collector at `http://localhost:4318/v1/traces`.
+- Update the agent definition to enable `experimental_telemetry` or equivalent tracing functionality.
+- Modify `index.ts` so that when run, it sends a single message "Hello" to the agent, waits for the response, logs it to `/home/user/app/output.log`, and gracefully exits after traces are flushed.
+
+## Constraints
+- Project path: /home/user/app
+- Log file: /home/user/app/output.log
+- Start command: `npm start`
+- The script must run without errors and successfully export traces.c:T404,# VoltAgent Voice Agent PII Redaction
+
+## Background
+VoltAgent provides a code-first approach to building agents. You need to implement a voice-enabled agent that handles audio transcription and uses guardrails to redact Personally Identifiable Information (PII) from the transcribed text.
+
+## Requirements
+- Initialize a Node.js project in `/home/user/workspace`.
+- Install `@voltagent/core` and any necessary AI SDK providers (e.g., `@ai-sdk/openai`).
+- Implement a script `index.ts` that defines a VoltAgent workflow.
+- The workflow should take an input string (simulating transcribed audio), detect PII (like emails, phone numbers, and names), and return a redacted version of the text (replacing PII with `[REDACTED]`).
+- Provide a function `redactPii(input: string): Promise<string>` exported from `index.ts`.
+
+## Constraints
+- Project path: `/home/user/workspace`
+- Use `npm` for package management.
+- Use `@voltagent/core` to orchestrate the agent.
+- Export the `redactPii` function so it can be tested programmatically.d:T476,# VoltAgent Conditional Workflow with `andWhen`
+
+## Background
+VoltAgent provides a declarative API for building multi-step AI workflows. You need to implement a workflow using `createWorkflowChain` that conditionally executes a step using `andWhen`.
+
+## Requirements
+- Create a Node.js project in `/home/user/app`.
+- Implement a workflow in `index.ts` that takes an input object: `{ value: number, operation: string }`.
+- Use `createWorkflowChain` from `@voltagent/core`.
+- Use `andWhen` to conditionally execute logic:
+  - If `operation === 'double'`, return `{ result: input.value * 2 }`.
+  - If `operation === 'square'`, return `{ result: input.value * input.value }`.
+- Export the created workflow as the default export.
+
+## Implementation Guide
+1. `cd /home/user/app`
+2. The project is already initialized with `@voltagent/core` and `typescript` installed.
+3. Create `index.ts` and implement the logic.
+4. Make sure to export the workflow as `export default workflow;`.
+
+## Constraints
+- Project path: /home/user/app
+- Use `@voltagent/core` version `2.7.0` or compatible.
+- Use `andWhen` for the conditional logic in the workflow chain.0:{"buildId":"Q-D1f2zlVN98yZ59oTYEL","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"min-h-screen bg-background text-foreground font-sans selection:bg-primary/20","children":[["$","div",null,{"className":"fixed inset-0 -z-10 h-full w-full bg-background bg-[radial-gradient(#2a2a2a_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20 dark:opacity-40"}],["$","$L2",null,{"tasksData":[{"taskName":"a2a_protocol_server","instruction":"$3","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"a2a_protocol_server__7mHLcwy","model":"gemini-3-flash","agent":"Pochi","passed":true,"reward":1,"error":true,"latency_sec":525.381,"latency_breakdown":{"env_setup":3.462,"agent_setup":52.944,"agent_exec":439.895,"verifier":14.193},"taskName":"a2a_protocol_server","jobId":"7mHLcwy","exec_duration":439.895}]},{"taskName":"agent_hooks_observability","instruction":"$4","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"agent_hooks_observability__bAMNiz7","model":"gemini-3-flash","agent":"Pochi","passed":false,"reward":null,"error":true,"latency_sec":1840.476,"latency_breakdown":{"env_setup":4.814,"agent_setup":19.609,"agent_exec":600.126,"verifier":1201.012},"taskName":"agent_hooks_observability","jobId":"bAMNiz7","exec_duration":600.126}]},{"taskName":"basic_zod_tool_calling","instruction":"$5","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"basic_zod_tool_calling__oCRazmf","model":"gemini-3-flash","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":294.459,"latency_breakdown":{"env_setup":3.691,"agent_setup":17.018,"agent_exec":252.328,"verifier":5.36},"taskName":"basic_zod_tool_calling","jobId":"oCRazmf","exec_duration":252.328}]},{"taskName":"custom_rest_api_rag","instruction":"$6","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"custom_rest_api_rag__rbYnoEQ","model":"gemini-3-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":183.826,"latency_breakdown":{"env_setup":4.864,"agent_setup":24.306,"agent_exec":58.985,"verifier":81.507},"taskName":"custom_rest_api_rag","jobId":"rbYnoEQ","exec_duration":58.985}]},{"taskName":"hono_server_rest_api","instruction":"$7","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"hono_server_rest_api__aKqaB7K","model":"gemini-3-flash","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":308.186,"latency_breakdown":{"env_setup":3.532,"agent_setup":19.34,"agent_exec":231.829,"verifier":36.77},"taskName":"hono_server_rest_api","jobId":"aKqaB7K","exec_duration":231.829}]},{"taskName":"mcp_client_integration","instruction":"$8","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"mcp_client_integration__vzimkPt","model":"gemini-3-flash","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":151.299,"latency_breakdown":{"env_setup":3.561,"agent_setup":16.595,"agent_exec":108.435,"verifier":5.463},"taskName":"mcp_client_integration","jobId":"vzimkPt","exec_duration":108.435}]},{"taskName":"memory_libsql_turso","instruction":"# VoltAgent with LibSQL Memory\n\n## Background\nVoltAgent supports persistent memory using LibSQL. You need to create a simple agent script that utilizes `LibSQLStorage`.\n\n## Requirements\n- Initialize a new Node.js project in `/home/user/agent-app`.\n- Install `@voltagent/core`, `@ai-sdk/openai`, and any required dependencies for LibSQL.\n- Create `index.ts` that defines an `Agent` using `LibSQLStorage` with the URL `file:memory.db`.\n- The agent should have the name `MemoryAgent` and instructions `You remember things.`.\n- Add a script to `package.json` to run `index.ts` (e.g., using `tsx` or `ts-node`).\n\n## Implementation Guide\n1. `mkdir -p /home/user/agent-app && cd /home/user/agent-app`\n2. `npm init -y`\n3. Install `@voltagent/core`, `@ai-sdk/openai`, `zod`, and `tsx`.\n4. Write `index.ts` with the agent definition.\n\n## Constraints\n- Project path: `/home/user/agent-app`\n- The database file must be created at `/home/user/agent-app/memory.db` after running the agent.\n","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"memory_libsql_turso__dVshTvv","model":"gemini-3-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":373.519,"latency_breakdown":{"env_setup":3.746,"agent_setup":51.431,"agent_exec":286.254,"verifier":7.249},"taskName":"memory_libsql_turso","jobId":"dVshTvv","exec_duration":286.254}]},{"taskName":"parallel_workflow_andall","instruction":"$9","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"parallel_workflow_andall__tW9A7xp","model":"gemini-3-flash","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":170.88,"latency_breakdown":{"env_setup":3.626,"agent_setup":16.126,"agent_exec":117.707,"verifier":7.496},"taskName":"parallel_workflow_andall","jobId":"tW9A7xp","exec_duration":117.707}]},{"taskName":"supervisor_writer_editor","instruction":"$a","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"supervisor_writer_editor__u2AWqW5","model":"gemini-3-flash","agent":"Pochi","passed":false,"reward":null,"error":true,"latency_sec":393.041,"latency_breakdown":{"env_setup":4.023,"agent_setup":16.529,"agent_exec":357.622,"verifier":null},"taskName":"supervisor_writer_editor","jobId":"u2AWqW5","exec_duration":357.622}]},{"taskName":"vercel_ai_exporter_tracing","instruction":"$b","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"vercel_ai_exporter_tracing__ZoFHSLu","model":"gemini-3-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":378.509,"latency_breakdown":{"env_setup":4.335,"agent_setup":35.432,"agent_exec":311.937,"verifier":12.151},"taskName":"vercel_ai_exporter_tracing","jobId":"ZoFHSLu","exec_duration":311.937}]},{"taskName":"voice_agent_pii_redaction","instruction":"$c","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"voice_agent_pii_redaction__k2VRyij","model":"gemini-3-flash","agent":"Pochi","passed":false,"reward":null,"error":true,"latency_sec":1416.782,"latency_breakdown":{"env_setup":3.441,"agent_setup":15.656,"agent_exec":181.993,"verifier":1201.024},"taskName":"voice_agent_pii_redaction","jobId":"k2VRyij","exec_duration":181.993}]},{"taskName":"workflow_conditional_andwhen","instruction":"$d","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"workflow_conditional_andwhen__efDeYSY","model":"gemini-3-flash","agent":"Pochi","passed":false,"reward":null,"error":true,"latency_sec":2.45,"latency_breakdown":{"env_setup":0.002,"agent_setup":null,"agent_exec":null,"verifier":null},"taskName":"workflow_conditional_andwhen","jobId":"efDeYSY","exec_duration":2.45}]},{"taskName":"workflow_type_inference_fix","instruction":"# Fix Workflow Type Inference Bug\n\n## Background\nVoltAgent users have reported issues where `createWorkflowChain`'s result schemas are not strictly enforced by the TypeScript compiler in complex branching scenarios (Issue #458).\n\n## Requirements\n- Read the details in `/workspace/instruction.md`.\n- Fix the type definitions for `createWorkflowChain` in the VoltAgent repository located at `/workspace/voltagent`.\n- Write or fix the tests to verify the type inference is strictly enforced.\n\n## Constraints\n- Project path: /workspace/voltagent\n- The fix must only be in TypeScript type definitions and related implementation.\n- Do not break existing public APIs.\n\n## Integrations\n- None","trials":[{"job_name":"2026-04-19__10-45-59","trial_name":"workflow_type_inference_fix__tAFQxXP","model":"gemini-3-flash","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":652.73,"latency_breakdown":{"env_setup":3.845,"agent_setup":20.456,"agent_exec":582.168,"verifier":32.183},"taskName":"workflow_type_inference_fix","jobId":"tAFQxXP","exec_duration":582.168}]}]}]]}],["$Le","$Lf"],"$L10"]}],"loading":null,"isPartial":false}
+e:["$","script","script-0",{"src":"/voltagent-benchmark/_next/static/chunks/aa2ff1d395e3be60.js","async":true}]
+f:["$","script","script-1",{"src":"/voltagent-benchmark/_next/static/chunks/be08138953094657.js","async":true}]
+10:["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]
+13:null
