@@ -1,0 +1,50 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 2,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1776568896.9574938,
+            "stop": 1776568896.981164
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_index_js_exists",
+                "status": "passed",
+                "duration": 0.00046520098112523556,
+                "start": 1776568896.965549,
+                "stop": 1776568896.9662113,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_uses_z_describe",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0005596039700321853,
+                "start": 1776568896.9663982,
+                "stop": 1776568896.9800568,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_index_js_uses_z_describe():\n        with open(INDEX_JS, \"r\") as f:\n            content = f.read()\n>       assert \"z.describe\" in content, \"Expected index.js to use z.describe() for tool parameters.\"\nE       AssertionError: Expected index.js to use z.describe() for tool parameters.\nE       assert 'z.describe' in 'import { createTool, Agent } from \"@voltagent/core\";\\nimport { z } from \"zod\";\\nimport { openai } from \"@ai-sdk/opena...FileSync(\"output.json\", JSON.stringify({ error: error.message }, null, 2));\\n    process.exit(1);\\n  }\\n}\\n\\nmain();\\n'\n\ntests/test_final_state.py:15: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_output_json_exists_and_valid",
+                "status": "passed",
+                "duration": 0.0006018760323058814,
+                "start": 1776568896.980277,
+                "stop": 1776568896.9810064,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

@@ -1,0 +1,88 @@
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s pochi-v0.6.7 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Agent Hooks Observability
+
+## Background
+VoltAgent provides Agent Hooks to intercept specific points in the agent execution pipeline for observability, logging, and behavior modification. You need to create an agent that uses these hooks to log its execution stages to a file.
+
+## Requirements
+- Initialize a Node.js project in `/home/user/app`.
+- Install `@voltagent/core`, `@voltagent/xsai`, and `zod`.
+- Create a tool named `calculate_sum` that takes two numbers `a` and `b` and returns their sum.
+- Create an agent using `XSAIProvider` (with model `gpt-4o-mini`) and configure it with the `calculate_sum` tool.
+- Configure the agent with the following hooks, each appending a specific string to `/home/user/app/hooks.log` (including a newline):
+  - `onStart`: Append `HOOK: onStart\n`
+  - `onToolStart`: Append `HOOK: onToolStart - calculate_sum\n`
+  - `onToolEnd`: Append `HOOK: onToolEnd - calculate_sum\n`
+  - `onEnd`: Append `HOOK: onEnd\n`
+- Write a script `index.js` that initializes this agent and calls `agent.generateText({ prompt: "Calculate the sum of 15 and 27" })`.
+- Run the script so that the agent executes the tool and triggers the hooks.
+
+## Implementation Guide
+1. `mkdir -p /home/user/app && cd /home/user/app`
+2. `npm init -y`
+3. `npm install @voltagent/core @voltagent/xsai zod`
+4. Create `index.js` with the agent definition, tool definition, and hook configuration.
+5. Ensure `OPENAI_API_KEY` is passed from the environment to `XSAIProvider`.
+6. Run `node index.js` to generate the log file.
+
+## Constraints
+- Project path: `/home/user/app`
+- Log file: `/home/user/app/hooks.log`
+- Use `fs.appendFileSync` or similar to write to the log file.
+- Do not hardcode the sum result; let the agent use the tool to calculate it.
+
+## Integrations
+- OpenAI
+EOF
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Trial agent_hooks_observability__bAMNiz7 failed: Verifier execution timed out after 600.0 seconds
