@@ -22,6 +22,7 @@ VoltAgent is a TypeScript framework for AI agents. You need to build a multi-ste
 - Project path: /home/user/my-agent-app
 - Log file: /home/user/my-agent-app/output.json
 - The workflow must use `andAll`.
+- `run.ts` must call `process.exit(0)` after writing `output.json`. VoltAgent registers signal handlers / async resources that keep Node's event loop alive; without an explicit exit the script will hang.
 
 ## Integrations
 - OpenAI

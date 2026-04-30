@@ -23,6 +23,7 @@ VoltAgent is an open-source TypeScript framework for building multi-agent system
 - Project path: /home/user/myproject
 - Log file: /home/user/myproject/output.txt
 - You must use `OPENAI_API_KEY` from the environment variables.
+- `index.ts` must call `process.exit(0)` after writing `output.txt`. VoltAgent registers signal handlers / async resources that keep Node's event loop alive; without an explicit exit the script will hang.
 
 ## Integrations
 - OpenAI

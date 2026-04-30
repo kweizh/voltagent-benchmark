@@ -12,7 +12,7 @@ def test_index_js_exists():
 def test_index_js_uses_z_describe():
     with open(INDEX_JS, "r") as f:
         content = f.read()
-    assert "z.describe" in content, "Expected index.js to use z.describe() for tool parameters."
+    assert ".describe(" in content, "Expected index.js to use Zod's .describe() for tool parameters (e.g. z.string().describe(...))."
 
 def test_output_json_exists_and_valid():
     assert os.path.isfile(OUTPUT_JSON), f"{OUTPUT_JSON} does not exist."

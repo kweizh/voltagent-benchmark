@@ -15,7 +15,15 @@ LABEL Description="VoltAgent MCP Client Integration Environment"
 
 RUN mkdir -p /home/user/app && \
     cd /home/user/app && \
-    npm init -y
+    npm init -y && \
+    npm pkg set type="module" && \
+    npm install \
+        @voltagent/core@^0.1.86 \
+        @voltagent/vercel-ai@^1.0.0 \
+        @ai-sdk/openai@^2.0.2 \
+        ai@^5.0.8 \
+        @modelcontextprotocol/sdk@^1.12 \
+        zod@^3.25
 
 RUN mkdir -p /home/user/servers && \
     cd /home/user/servers && \
@@ -87,7 +95,7 @@ EOF
 
 # Container contents:
 #   - Node.js v20 and npm
-#   - /home/user/app - initialized npm project
+#   - /home/user/app - initialized npm project with pinned VoltAgent + AI SDK deps
 #   - /home/user/servers - two MCP servers (math-server.js, string-server.js) with @modelcontextprotocol/sdk installed
 
 CMD ["/bin/bash", "-c", "trap : TERM INT; sleep infinity & wait"]

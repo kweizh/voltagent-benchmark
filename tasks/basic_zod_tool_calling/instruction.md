@@ -7,7 +7,7 @@ VoltAgent provides a code-first approach to agent development. You need to creat
 - Initialize a project in `/home/user/agent-app`.
 - Install `@voltagent/core`, `zod`, and `@ai-sdk/openai`.
 - Create `index.js` that defines a `get_weather` tool using `createTool` from `@voltagent/core`.
-- The tool parameters must use `z.describe()` for all fields (e.g., `city: z.string().describe("The name of the city")`).
+- The tool parameters must use Zod's `.describe()` modifier on all fields (e.g., `city: z.string().describe("The name of the city")`).
 - Create an `Agent` using the `openai("gpt-4o-mini")` model and the `get_weather` tool.
 - The script should invoke the agent with the prompt "What is the weather in London?" and save the resulting JSON to `/home/user/agent-app/output.json`.
 

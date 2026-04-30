@@ -29,6 +29,7 @@ VoltAgent provides Agent Hooks to intercept specific points in the agent executi
 - Log file: `/home/user/app/hooks.log`
 - Use `fs.appendFileSync` or similar to write to the log file.
 - Do not hardcode the sum result; let the agent use the tool to calculate it.
+- `index.js` must call `process.exit(0)` after `generateText` resolves. VoltAgent / providers commonly leak event-loop handles, so without an explicit exit the script will hang.
 
 ## Integrations
 - OpenAI
