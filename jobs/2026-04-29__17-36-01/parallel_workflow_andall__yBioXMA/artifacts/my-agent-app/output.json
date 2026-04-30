@@ -1,0 +1,20 @@
+{
+  "executionId": "b891bd99-46c8-46cd-ba87-5114a8d7275a",
+  "workflowId": "parallel-workflow",
+  "startAt": "2026-04-30T05:21:14.475Z",
+  "endAt": "2026-04-30T05:21:14.476Z",
+  "status": "completed",
+  "result": {
+    "input": "Parallel analysis with VoltAgent.",
+    "analysis": {
+      "wordCount": 4,
+      "characterCount": 33,
+      "hasNumbers": false
+    }
+  },
+  "usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  }
+}

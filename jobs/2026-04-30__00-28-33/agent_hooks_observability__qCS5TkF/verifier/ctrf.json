@@ -1,0 +1,114 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 4,
+            "failed": 4,
+            "skipped": 1,
+            "pending": 0,
+            "other": 0,
+            "start": 1777534815.5620756,
+            "stop": 1777534824.6876354
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_exists",
+                "status": "passed",
+                "duration": 9.10198609798681,
+                "start": 1777534815.5692635,
+                "stop": 1777534824.6719472,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_onstart",
+                "status": "passed",
+                "duration": 0.0004422199563123286,
+                "start": 1777534824.6721313,
+                "stop": 1777534824.6727397,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_ontoolstart",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0004033020231872797,
+                "start": 1777534824.6728191,
+                "stop": 1777534824.6802764,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_ontoolstart():\n>       assert \"HOOK: onToolStart - calculate_sum\" in _read_log(), \\\n            \"Expected 'HOOK: onToolStart - calculate_sum' in hooks.log\"\nE       AssertionError: Expected 'HOOK: onToolStart - calculate_sum' in hooks.log\nE       assert 'HOOK: onToolStart - calculate_sum' in 'HOOK: onStart\\nHOOK: onEnd\\n'\nE        +  where 'HOOK: onStart\\nHOOK: onEnd\\n' = _read_log()\n\ntests/test_final_state.py:124: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_ontoolend",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0003467160277068615,
+                "start": 1777534824.6803517,
+                "stop": 1777534824.6821785,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_ontoolend():\n>       assert \"HOOK: onToolEnd - calculate_sum\" in _read_log(), \\\n            \"Expected 'HOOK: onToolEnd - calculate_sum' in hooks.log\"\nE       AssertionError: Expected 'HOOK: onToolEnd - calculate_sum' in hooks.log\nE       assert 'HOOK: onToolEnd - calculate_sum' in 'HOOK: onStart\\nHOOK: onEnd\\n'\nE        +  where 'HOOK: onStart\\nHOOK: onEnd\\n' = _read_log()\n\ntests/test_final_state.py:129: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_onend",
+                "status": "passed",
+                "duration": 0.00022446305956691504,
+                "start": 1777534824.6822588,
+                "stop": 1777534824.6825771,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_order",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0003305500140413642,
+                "start": 1777534824.682637,
+                "stop": 1777534824.6845632,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_order():\n        lines = [line.strip() for line in _read_log().splitlines() if line.strip().startswith(\"HOOK:\")]\n        expected_order = [\n            \"HOOK: onStart\",\n            \"HOOK: onToolStart - calculate_sum\",\n            \"HOOK: onToolEnd - calculate_sum\",\n            \"HOOK: onEnd\",\n        ]\n        actual_order = [line for line in lines if line in expected_order]\n        # The agent may invoke generateText more than once (e.g. retries, or a\n        # warm-up call). Accept any concatenation of complete 4-hook runs as long\n        # as every chunk preserves the expected order.\n        assert len(actual_order) > 0, \"No expected hook lines found in log.\"\n>       assert len(actual_order) % len(expected_order) == 0, (\n            f\"Hook log length {len(actual_order)} is not a multiple of \"\n            f\"{len(expected_order)} \u2014 got an incomplete run: {actual_order}\"\n        )\nE       AssertionError: Hook log length 2 is not a multiple of 4 \u2014 got an incomplete run: ['HOOK: onStart', 'HOOK: onEnd']\nE       assert (2 % 4) == 0\nE        +  where 2 = len(['HOOK: onStart', 'HOOK: onEnd'])\nE        +  and   4 = len(['HOOK: onStart', 'HOOK: onToolStart - calculate_sum', 'HOOK: onToolEnd - calculate_sum', 'HOOK: onEnd'])\n\ntests/test_final_state.py:150: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_tool_actually_invoked_once_per_call",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0002632980467751622,
+                "start": 1777534824.6846287,
+                "stop": 1777534824.686356,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_tool_actually_invoked_once_per_call():\n        \"\"\"The tool hook pair must fire at least once, and counts must match \u2014\n        hardcoded sums or skipped tool calls would break this.\"\"\"\n        content = _read_log()\n        n_start = content.count(\"HOOK: onToolStart - calculate_sum\")\n        n_end = content.count(\"HOOK: onToolEnd - calculate_sum\")\n>       assert n_start >= 1, \"calculate_sum tool was never started \u2014 agent likely hardcoded the result.\"\nE       AssertionError: calculate_sum tool was never started \u2014 agent likely hardcoded the result.\nE       assert 0 >= 1\n\ntests/test_final_state.py:168: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_uses_tool_and_hooks",
+                "status": "passed",
+                "duration": 0.00043847004417330027,
+                "start": 1777534824.68645,
+                "stop": 1777534824.687004,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_generate_text_result_reflects_sum",
+                "status": "skipped",
+                "duration": 0.0002774239983409643,
+                "start": 1777534824.687079,
+                "stop": 1777534824.68748,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "('/tests/test_final_state.py', 201, 'Skipped: No run-stdout.txt / result.txt emitted by index.js; skipping output-value check.')"
+            }
+        ]
+    }
+}

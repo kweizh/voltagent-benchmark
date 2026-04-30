@@ -1,0 +1,49 @@
+{
+    "id": "e9edd2a3-580e-4240-aa9c-1e708ac1099c",
+    "started_at": "2026-04-29T17:04:43.480832",
+    "finished_at": "2026-04-29T17:29:36.872667",
+    "n_total_trials": 12,
+    "stats": {
+        "n_trials": 12,
+        "n_errors": 2,
+        "evals": {
+            "pochi__claude-4-6-sonnet__voltagent-tasks": {
+                "n_trials": 12,
+                "n_errors": 2,
+                "metrics": [
+                    {
+                        "mean": 0.6666666666666666
+                    }
+                ],
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "hono_server_rest_api__FNSa27a",
+                            "agent_hooks_observability__7oCVz4c",
+                            "basic_zod_tool_calling__EUt6P7r",
+                            "workflow_conditional_andwhen__3iGmUDj",
+                            "supervisor_writer_editor__P8huWgu",
+                            "vercel_ai_exporter_tracing__GL24P23",
+                            "parallel_workflow_andall__w7bkPcz",
+                            "custom_rest_api_rag__RG6b9Pa"
+                        ],
+                        "0.0": [
+                            "voice_agent_pii_redaction__BSXoAjc",
+                            "a2a_protocol_server__bPp5Wsj",
+                            "mcp_client_integration__aDDUieR",
+                            "memory_libsql_turso__gzfrxck"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "voice_agent_pii_redaction__BSXoAjc"
+                    ],
+                    "NonZeroAgentExitCodeError": [
+                        "mcp_client_integration__aDDUieR"
+                    ]
+                }
+            }
+        }
+    }
+}

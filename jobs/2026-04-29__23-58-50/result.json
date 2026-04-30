@@ -1,0 +1,51 @@
+{
+    "id": "720b164a-0acd-4758-9542-6a96dbc6bba7",
+    "started_at": "2026-04-29T23:58:57.110225",
+    "finished_at": "2026-04-30T00:21:49.087978",
+    "n_total_trials": 12,
+    "stats": {
+        "n_trials": 12,
+        "n_errors": 4,
+        "evals": {
+            "pochi__gemini-3.1-pro__voltagent-tasks": {
+                "n_trials": 12,
+                "n_errors": 4,
+                "metrics": [
+                    {
+                        "mean": 0.5833333333333334
+                    }
+                ],
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "hono_server_rest_api__eaLeCEJ",
+                            "basic_zod_tool_calling__VWgghWs",
+                            "workflow_conditional_andwhen__NbiSCrT",
+                            "supervisor_writer_editor__dmZzaho",
+                            "vercel_ai_exporter_tracing__Gy9cAhC",
+                            "parallel_workflow_andall__GKTENuZ",
+                            "mcp_client_integration__DvhGciM"
+                        ],
+                        "0.0": [
+                            "agent_hooks_observability__4SFtYeH",
+                            "voice_agent_pii_redaction__oKssb4p",
+                            "custom_rest_api_rag__gTmM8bg",
+                            "a2a_protocol_server__DoKgz8z",
+                            "memory_libsql_turso__5GSiv2U"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "agent_hooks_observability__4SFtYeH",
+                        "voice_agent_pii_redaction__oKssb4p",
+                        "a2a_protocol_server__DoKgz8z"
+                    ],
+                    "NonZeroAgentExitCodeError": [
+                        "custom_rest_api_rag__gTmM8bg"
+                    ]
+                }
+            }
+        }
+    }
+}

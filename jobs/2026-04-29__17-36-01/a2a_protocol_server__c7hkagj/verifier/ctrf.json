@@ -1,0 +1,56 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1777526385.1256516,
+            "stop": 1777526390.0530133
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_process_endpoint_basic",
+                "status": "passed",
+                "duration": 4.719022412959021,
+                "start": 1777526385.1390026,
+                "stop": 1777526389.8584437,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_process_endpoint_receiver_extracts_structured_payload",
+                "status": "passed",
+                "duration": 0.17263070301851258,
+                "start": 1777526389.8586752,
+                "stop": 1777526390.0315979,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_process_endpoint_rejects_empty_text",
+                "status": "passed",
+                "duration": 0.0041842039790935814,
+                "start": 1777526390.0317707,
+                "stop": 1777526390.0362566,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_server_still_alive_after_requests",
+                "status": "passed",
+                "duration": 0.016083980968687683,
+                "start": 1777526390.0364223,
+                "stop": 1777526390.0526612,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

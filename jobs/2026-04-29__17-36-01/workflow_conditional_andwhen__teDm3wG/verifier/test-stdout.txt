@@ -1,0 +1,100 @@
+downloading uv 0.9.7 aarch64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 24ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+tests/test_final_state.py F.                                             [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_workflow_conditional_logic ________________________
+
+    def test_workflow_conditional_logic():
+        # Write the verification script. Force process.exit(0) on success because
+        # importing the agent's index.ts can keep Node's event loop alive (e.g.
+        # VoltAgent registers signal handlers / async resources); otherwise a
+        # successful run would hang until the subprocess timeout fires.
+        with open(VERIFY_SCRIPT, "w") as f:
+            f.write('''
+    import workflow from "./index";
+    
+    async function run() {
+        const doubleResult = await workflow.run({ value: 5, operation: "double" });
+        const squareResult = await workflow.run({ value: 5, operation: "square" });
+    
+        console.log(JSON.stringify({
+            double: doubleResult,
+            square: squareResult
+        }));
+    }
+    
+    run().then(
+        () => process.exit(0),
+        (err) => { console.error(err); process.exit(1); },
+    );
+    ''')
+    
+        # Run the verification script under a hard timeout.
+        try:
+            result = subprocess.run(
+                ["npx", "ts-node", "verify.ts"],
+                capture_output=True,
+                text=True,
+                cwd=PROJECT_DIR,
+                timeout=TS_NODE_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(
+                f"verify.ts timed out after {TS_NODE_TIMEOUT_SEC}s. "
+                f"stdout: {e.stdout!r}\nstderr: {e.stderr!r}"
+            )
+    
+>       assert result.returncode == 0, f"Verification script failed: {result.stderr}"
+E       AssertionError: Verification script failed: /home/user/app/node_modules/ts-node/src/index.ts:859
+E             return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+E                    ^
+E         TSError: ⨯ Unable to compile TypeScript:
+E         verify.ts(5,45): error TS2345: Argument of type '{ value: number; operation: string; }' is not assignable to parameter of type 'undefined'.
+E         verify.ts(6,45): error TS2345: Argument of type '{ value: number; operation: string; }' is not assignable to parameter of type 'undefined'.
+E         
+E             at createTSError (/home/user/app/node_modules/ts-node/src/index.ts:859:12)
+E             at reportTSError (/home/user/app/node_modules/ts-node/src/index.ts:863:19)
+E             at getOutput (/home/user/app/node_modules/ts-node/src/index.ts:1077:36)
+E             at Object.compile (/home/user/app/node_modules/ts-node/src/index.ts:1433:41)
+E             at Module.m._compile (/home/user/app/node_modules/ts-node/src/index.ts:1617:30)
+E             at node:internal/modules/cjs/loader:1943:10
+E             at Object.require.extensions.<computed> [as .ts] (/home/user/app/node_modules/ts-node/src/index.ts:1621:12)
+E             at Module.load (node:internal/modules/cjs/loader:1533:32)
+E             at Module._load (node:internal/modules/cjs/loader:1335:12)
+E             at wrapModuleLoad (node:internal/modules/cjs/loader:255:19) {
+E           diagnosticCodes: [ 2345, 2345 ]
+E         }
+E         npm notice
+E         npm notice New minor version of npm available! 11.11.0 -> 11.13.0
+E         npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.13.0
+E         npm notice To update run: npm install -g npm@11.13.0
+E         npm notice
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['npx', 'ts-node', 'verify.ts'], returncode=1, stdout='', stderr="/home/user/app/node_modules/ts... https://github.com/npm/cli/releases/tag/v11.13.0\nnpm notice To update run: npm install -g npm@11.13.0\nnpm notice\n").returncode
+
+tests/test_final_state.py:51: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_uses_andwhen
+FAILED tests/test_final_state.py::test_workflow_conditional_logic - Assertion...
+========================= 1 failed, 1 passed in 1.32s ==========================

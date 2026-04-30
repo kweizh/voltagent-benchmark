@@ -1,0 +1,62 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 2,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1777533696.8528752,
+            "stop": 1777533698.184248
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_process_endpoint_basic",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 1.1587689279695041,
+                "start": 1777533696.8673315,
+                "stop": 1777533698.0966387,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_process_endpoint_basic(start_app):\n        \"\"\"Baseline: the endpoint responds 200 and the body mentions the payload.\"\"\"\n        payload = {\"text\": \"Please process this incoming A2A message: { 'source': 'node-1', 'data': 'cpu usage at 99%' }\"}\n        try:\n>           status, body = _post_json(\"/api/process\", payload, timeout=PROCESS_REQUEST_TIMEOUT_SEC)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_final_state.py:75: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_final_state.py:31: in _post_json\n    with urllib.request.urlopen(req, timeout=timeout) as response:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:215: in urlopen\n    return opener.open(url, data, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:521: in open\n    response = meth(req, response)\n               ^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:630: in http_response\n    response = self.parent.error(\nusr/lib/python3.12/urllib/request.py:559: in error\n    return self._call_chain(*args)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:492: in _call_chain\n    result = func(*args)\n             ^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <urllib.request.HTTPDefaultErrorHandler object at 0xf25cbd444c80>\nreq = <urllib.request.Request object at 0xf25cbd5afa10>\nfp = <http.client.HTTPResponse object at 0xf25cbe04f5e0>, code = 404\nmsg = 'Not Found', hdrs = <http.client.HTTPMessage object at 0xf25cbd292ba0>\n\n    def http_error_default(self, req, fp, code, msg, hdrs):\n>       raise HTTPError(req.full_url, code, msg, hdrs, fp)\nE       urllib.error.HTTPError: HTTP Error 404: Not Found\n\nusr/lib/python3.12/urllib/request.py:639: HTTPError\n\nDuring handling of the above exception, another exception occurred:\n\nstart_app = None\n\n    def test_process_endpoint_basic(start_app):\n        \"\"\"Baseline: the endpoint responds 200 and the body mentions the payload.\"\"\"\n        payload = {\"text\": \"Please process this incoming A2A message: { 'source': 'node-1', 'data': 'cpu usage at 99%' }\"}\n        try:\n            status, body = _post_json(\"/api/process\", payload, timeout=PROCESS_REQUEST_TIMEOUT_SEC)\n        except (urllib.error.URLError, TimeoutError) as e:\n>           pytest.fail(f\"HTTP request to /api/process failed: {e}\")\nE           Failed: HTTP request to /api/process failed: HTTP Error 404: Not Found\n\ntests/test_final_state.py:77: Failed",
+                "message": "The test failed in the call phase"
+            },
+            {
+                "name": "test_final_state.py::test_process_endpoint_receiver_extracts_structured_payload",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.013162760995328426,
+                "start": 1777533698.0968988,
+                "stop": 1777533698.1726496,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_process_endpoint_receiver_extracts_structured_payload(start_app):\n        \"\"\"The receiver agent is supposed to extract structured JSON from the\n        incoming text. Check that distinctive fields flow through to the\n        processor's summary.\"\"\"\n        payload = {\n            \"text\": (\n                \"Incoming A2A message envelope: \"\n                \"{ 'source': 'sensor-7', 'severity': 'critical', \"\n                \"'data': 'temperature exceeded 95C in rack-B' }\"\n            )\n        }\n        try:\n>           status, body = _post_json(\"/api/process\", payload, timeout=PROCESS_REQUEST_TIMEOUT_SEC)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_final_state.py:95: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/test_final_state.py:31: in _post_json\n    with urllib.request.urlopen(req, timeout=timeout) as response:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:215: in urlopen\n    return opener.open(url, data, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:521: in open\n    response = meth(req, response)\n               ^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:630: in http_response\n    response = self.parent.error(\nusr/lib/python3.12/urllib/request.py:559: in error\n    return self._call_chain(*args)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nusr/lib/python3.12/urllib/request.py:492: in _call_chain\n    result = func(*args)\n             ^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <urllib.request.HTTPDefaultErrorHandler object at 0xf25cbd444c80>\nreq = <urllib.request.Request object at 0xf25cbd5ae210>\nfp = <http.client.HTTPResponse object at 0xf25cbd2998d0>, code = 404\nmsg = 'Not Found', hdrs = <http.client.HTTPMessage object at 0xf25cbd2993d0>\n\n    def http_error_default(self, req, fp, code, msg, hdrs):\n>       raise HTTPError(req.full_url, code, msg, hdrs, fp)\nE       urllib.error.HTTPError: HTTP Error 404: Not Found\n\nusr/lib/python3.12/urllib/request.py:639: HTTPError\n\nDuring handling of the above exception, another exception occurred:\n\nstart_app = None\n\n    def test_process_endpoint_receiver_extracts_structured_payload(start_app):\n        \"\"\"The receiver agent is supposed to extract structured JSON from the\n        incoming text. Check that distinctive fields flow through to the\n        processor's summary.\"\"\"\n        payload = {\n            \"text\": (\n                \"Incoming A2A message envelope: \"\n                \"{ 'source': 'sensor-7', 'severity': 'critical', \"\n                \"'data': 'temperature exceeded 95C in rack-B' }\"\n            )\n        }\n        try:\n            status, body = _post_json(\"/api/process\", payload, timeout=PROCESS_REQUEST_TIMEOUT_SEC)\n        except (urllib.error.URLError, TimeoutError) as e:\n>           pytest.fail(f\"HTTP request to /api/process failed: {e}\")\nE           Failed: HTTP request to /api/process failed: HTTP Error 404: Not Found\n\ntests/test_final_state.py:97: Failed",
+                "message": "The test failed in the call phase"
+            },
+            {
+                "name": "test_final_state.py::test_process_endpoint_rejects_empty_text",
+                "status": "passed",
+                "duration": 0.005674402054864913,
+                "start": 1777533698.1727653,
+                "stop": 1777533698.1790547,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_server_still_alive_after_requests",
+                "status": "passed",
+                "duration": 0.004688885062932968,
+                "start": 1777533698.179145,
+                "stop": 1777533698.1840112,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

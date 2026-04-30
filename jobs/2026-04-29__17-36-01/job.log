@@ -1,0 +1,1070 @@
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo workflow_conditional_andwhen__teDm3wG > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent Conditional Workflow with `andWhen`
+
+## Background
+VoltAgent provides a declarative API for building multi-step AI workflows. You need to implement a workflow using `createWorkflowChain` that conditionally executes a step using `andWhen`.
+
+## Requirements
+- Create a Node.js project in `/home/user/app`.
+- Implement a workflow in `index.ts` that takes an input object: `{ value: number, operation: string }`.
+- Use `createWorkflowChain` from `@voltagent/core`.
+- Use `andWhen` to conditionally execute logic:
+  - If `operation === 'double'`, return `{ result: input.value * 2 }`.
+  - If `operation === 'square'`, return `{ result: input.value * input.value }`.
+- Export the created workflow as the default export.
+
+## Implementation Guide
+1. `cd /home/user/app`
+2. The project is already initialized with `@voltagent/core` and `typescript` installed.
+3. Create `index.ts` and implement the logic.
+4. Make sure to export the workflow as `export default workflow;`.
+
+## Constraints
+- Project path: /home/user/app
+- Use `@voltagent/core` version `2.7.0` or compatible.
+- Use `andWhen` for the conditional logic in the workflow chain.
+EOF
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo voice_agent_pii_redaction__RLN5vya > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent Voice Agent PII Redaction
+
+## Background
+VoltAgent provides a code-first approach to building agents. You need to implement a voice-enabled agent that handles audio transcription and uses guardrails to redact Personally Identifiable Information (PII) from the transcribed text.
+
+## Requirements
+- Initialize a Node.js project in `/home/user/workspace`.
+- Install `@voltagent/core` and any necessary AI SDK providers (e.g., `@ai-sdk/openai`).
+- Implement a script `index.ts` that defines a VoltAgent workflow.
+- The workflow should take an input string (simulating transcribed audio), detect PII (like emails, phone numbers, and names), and return a redacted version of the text (replacing PII with `[REDACTED]`).
+- Provide a function `redactPii(input: string): Promise<string>` exported from `index.ts`.
+
+## Constraints
+- Project path: `/home/user/workspace`
+- Use `npm` for package management.
+- Use `@voltagent/core` to orchestrate the agent.
+- Export the `redactPii` function so it can be tested programmatically.
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo agent_hooks_observability__qM2vKQL > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# Agent Hooks Observability
+
+## Background
+VoltAgent provides Agent Hooks to intercept specific points in the agent execution pipeline for observability, logging, and behavior modification. You need to create an agent that uses these hooks to log its execution stages to a file.
+
+## Requirements
+- Initialize a Node.js project in `/home/user/app`.
+- Install `@voltagent/core`, `@voltagent/xsai`, and `zod`.
+- Create a tool named `calculate_sum` that takes two numbers `a` and `b` and returns their sum.
+- Create an agent using `XSAIProvider` (with model `gpt-4o-mini`) and configure it with the `calculate_sum` tool.
+- Configure the agent with the following hooks, each appending a specific string to `/home/user/app/hooks.log` (including a newline):
+  - `onStart`: Append `HOOK: onStart\n`
+  - `onToolStart`: Append `HOOK: onToolStart - calculate_sum\n`
+  - `onToolEnd`: Append `HOOK: onToolEnd - calculate_sum\n`
+  - `onEnd`: Append `HOOK: onEnd\n`
+- Write a script `index.js` that initializes this agent and calls `agent.generateText({ prompt: "Calculate the sum of 15 and 27" })`.
+- Run the script so that the agent executes the tool and triggers the hooks.
+
+## Implementation Guide
+1. `mkdir -p /home/user/app && cd /home/user/app`
+2. `npm init -y`
+3. `npm install @voltagent/core @voltagent/xsai zod`
+4. Create `index.js` with the agent definition, tool definition, and hook configuration.
+5. Ensure `OPENAI_API_KEY` is passed from the environment to `XSAIProvider`.
+6. Run `node index.js` to generate the log file.
+
+## Constraints
+- Project path: `/home/user/app`
+- Log file: `/home/user/app/hooks.log`
+- Use `fs.appendFileSync` or similar to write to the log file.
+- Do not hardcode the sum result; let the agent use the tool to calculate it.
+- `index.js` must call `process.exit(0)` after `generateText` resolves. VoltAgent / providers commonly leak event-loop handles, so without an explicit exit the script will hang.
+
+## Integrations
+- OpenAI
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo basic_zod_tool_calling__uW5ib8T > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent Custom Tool with Zod
+
+## Background
+VoltAgent provides a code-first approach to agent development. You need to create a simple Node.js script that defines a custom tool with Zod schema descriptions and invokes an agent to use it.
+
+## Requirements
+- Initialize a project in `/home/user/agent-app`.
+- Install `@voltagent/core`, `zod`, and `@ai-sdk/openai`.
+- Create `index.js` that defines a `get_weather` tool using `createTool` from `@voltagent/core`.
+- The tool parameters must use Zod's `.describe()` modifier on all fields (e.g., `city: z.string().describe("The name of the city")`).
+- Create an `Agent` using the `openai("gpt-4o-mini")` model and the `get_weather` tool.
+- The script should invoke the agent with the prompt "What is the weather in London?" and save the resulting JSON to `/home/user/agent-app/output.json`.
+
+## Implementation Guide
+1. `mkdir -p /home/user/agent-app && cd /home/user/agent-app`
+2. `npm init -y`
+3. `npm install @voltagent/core zod @ai-sdk/openai`
+4. Write `index.js` to create the tool and agent, run the agent, and write the output to `output.json`.
+
+## Constraints
+- Project path: /home/user/agent-app
+- Log file: /home/user/agent-app/output.json
+- Start command: `node index.js`
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo hono_server_rest_api__h9uuRDU > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent Hono Server with Custom REST API
+
+## Background
+VoltAgent uses `@voltagent/server-hono` to serve its HTTP APIs. It allows developers to register custom REST API routes via the `configureApp` callback.
+
+## Requirements
+- Initialize a Node.js project in `/home/user/voltagent-app`.
+- Install `@voltagent/core` and `@voltagent/server-hono`.
+- Create a simple VoltAgent agent named `testAgent`.
+- Configure the Hono server to listen on port `3000`.
+- Register a custom GET endpoint at `/api/status` that returns `{"status": "running"}`.
+
+## Implementation Guide
+1. Create a directory `/home/user/voltagent-app` and initialize a Node.js project.
+2. Install the required packages: `npm install @voltagent/core @voltagent/server-hono`.
+3. Create an `index.js` file.
+4. Define a basic agent using `Agent` from `@voltagent/core`.
+5. Initialize `VoltAgent` with the agent and `honoServer`.
+6. In `honoServer`, set `port: 3000` and use `configureApp: (app) => { app.get("/api/status", (c) => c.json({ status: "running" })); }` to add the `/api/status` route.
+
+## Constraints
+- Project path: `/home/user/voltagent-app`
+- Start command: `node index.js`
+- Port: `3000`
+
+## Integrations
+- None
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo supervisor_writer_editor__Eaie3p6 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent Supervisor Writer-Editor Workflow
+
+## Background
+VoltAgent is an open-source TypeScript framework for building multi-agent systems. You need to create a multi-agent workflow where a Writer agent drafts an article, and an Editor agent reviews and revises it.
+
+## Requirements
+- Create a Writer Agent that takes a topic and writes a short article.
+- Create an Editor Agent that takes a drafted article and improves its grammar, clarity, and tone.
+- Create a workflow using `createWorkflowChain` that chains the Writer and Editor sequentially.
+- Execute the workflow with the topic "The Future of AI" and save the final edited output to `output.txt`.
+
+## Implementation Guide
+1. Initialize a Node.js project in `/home/user/myproject` with TypeScript setup.
+2. Install `@voltagent/core`, `@ai-sdk/openai`, `dotenv`, and `zod`.
+3. Create an `index.ts` file.
+4. Instantiate a Writer Agent and an Editor Agent using `Agent` from `@voltagent/core`.
+   - Use `openai("gpt-4o-mini")` as the model for both.
+5. Build a workflow using `createWorkflowChain()` that first runs the Writer Agent, then passes the result to the Editor Agent.
+6. Run the workflow with the initial input text `"The Future of AI"`.
+7. Write the final output string to `/home/user/myproject/output.txt`.
+
+## Constraints
+- Project path: /home/user/myproject
+- Log file: /home/user/myproject/output.txt
+- You must use `OPENAI_API_KEY` from the environment variables.
+- `index.ts` must call `process.exit(0)` after writing `output.txt`. VoltAgent registers signal handlers / async resources that keep Node's event loop alive; without an explicit exit the script will hang.
+
+## Integrations
+- OpenAI
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo vercel_ai_exporter_tracing__3rmFXFb > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent Tracing Setup
+
+## Background
+You have a basic VoltAgent project in `/home/user/app` with a simple agent responding to user inputs.
+Your task is to enable telemetry so that all LLM calls made by the agent are traced and exported using Vercel AI SDK's OpenTelemetry integration.
+
+## Requirements
+- Install the necessary OpenTelemetry and Vercel AI SDK tracing packages (e.g., `@vercel/otel`, `@opentelemetry/sdk-trace-node`, `@opentelemetry/exporter-trace-otlp-http`).
+- Configure the telemetry in `/home/user/app/index.ts` to export traces to a local OTLP HTTP collector at `http://localhost:4318/v1/traces`.
+- Update the agent definition to enable `experimental_telemetry` or equivalent tracing functionality.
+- Modify `index.ts` so that when run, it sends a single message "Hello" to the agent, waits for the response, logs it to `/home/user/app/output.log`, then flushes the tracer (e.g. `await sdk.shutdown()` / `await provider.forceFlush()`) and calls `process.exit(0)`. VoltAgent + an active OTel SDK both keep Node's event loop alive; without an explicit exit the script will hang.
+
+## Constraints
+- Project path: /home/user/app
+- Log file: /home/user/app/output.log
+- Start command: `npm start`
+- The script must run without errors and successfully export traces.
+EOF
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo parallel_workflow_andall__yBioXMA > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent Parallel Workflow
+
+## Background
+VoltAgent is a TypeScript framework for AI agents. You need to build a multi-step workflow using `andAll` to perform parallel analysis of a single input string.
+
+## Requirements
+- You have an empty directory at `/home/user/my-agent-app`.
+- Initialize a Node.js project there and install `@voltagent/core` and `@ai-sdk/openai`.
+- Create an `index.ts` file that exports a workflow named `parallelWorkflow`.
+- The workflow must use `createWorkflowChain()`.
+- It should have an `andAll` step with ID `parallel-analysis` containing at least two parallel steps (e.g. `andAgent` or `andThen`).
+- Provide a script `run.ts` that executes this workflow with an input string and saves the output to `/home/user/my-agent-app/output.json`.
+
+## Implementation Guide
+1. `cd /home/user/my-agent-app`
+2. Run `npm init -y` and `npm install @voltagent/core @ai-sdk/openai typescript @types/node tsx`.
+3. Create `index.ts` with the workflow definition.
+4. Create `run.ts` to execute the workflow and write to `output.json`.
+5. Run `npx tsx run.ts` to generate `output.json`.
+
+## Constraints
+- Project path: /home/user/my-agent-app
+- Log file: /home/user/my-agent-app/output.json
+- The workflow must use `andAll`.
+- `run.ts` must call `process.exit(0)` after writing `output.json`. VoltAgent registers signal handlers / async resources that keep Node's event loop alive; without an explicit exit the script will hang.
+
+## Integrations
+- OpenAI
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo custom_rest_api_rag__zqHJdBC > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent Custom REST API RAG
+
+## Background
+VoltAgent provides a `BaseRetriever` class in `@voltagent/core` that can be extended to create custom RAG retrievers. You have a VoltAgent project initialized at `/home/user/voltagent-project`.
+
+## Requirements
+- Create a `RestApiRetriever` class in `src/retriever.ts` that extends `BaseRetriever` from `@voltagent/core`.
+- The constructor should accept an options object containing `baseUrl: string` and pass any other options to `super()`.
+- Implement the `async retrieve(query: string)` method. It must fetch data from the REST API using `GET ${this.baseUrl}?query=${encodeURIComponent(query)}`.
+- The REST API returns a JSON array of objects with a `text` property (e.g., `[{ text: "doc1" }]`).
+- The `retrieve` method must return an array of objects, where each object has a `text` property containing the document text.
+- Export the `RestApiRetriever` as the default export.
+
+## Constraints
+- Project path: `/home/user/voltagent-project`
+- Use the native `fetch` API.
+- Ensure the code passes the existing test suite. Run `npm test` to verify your implementation.
+
+## Integrations
+- None
+EOF
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo a2a_protocol_server__c7hkagj > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent A2A Protocol Server
+
+## Background
+VoltAgent is a TypeScript framework for orchestrating AI agents. Your task is to build a complex Agent-to-Agent (A2A) protocol server using VoltAgent and Hono. The server will orchestrate communication between two specialized agents.
+
+## Requirements
+- Initialize a Node.js project in `/home/user/agent-server`.
+- Install `@voltagent/core`, `@voltagent/server-hono`, `@ai-sdk/openai`, `zod`, and `hono`.
+- Create a `server.ts` that sets up a VoltAgent instance with a Hono server.
+- Define two agents: `receiver` and `processor` using `gpt-4o-mini`.
+- The `receiver` agent should be responsible for extracting a structured JSON payload from incoming text.
+- The `processor` agent should analyze the extracted payload and generate a summary.
+- Create a workflow chain that connects `receiver` to `processor`.
+- Expose an endpoint `/api/process` that triggers this workflow.
+
+## Implementation Guide
+1. Run `npm init -y` and install the required dependencies.
+2. In `server.ts`, define the agents and the workflow using `createWorkflowChain` and `andAgent`.
+3. Configure `VoltAgent` with the `honoServer()` and register the workflow.
+4. Start the server on port 3000.
+
+## Constraints
+- Project path: /home/user/agent-server
+- Start command: `npx tsx server.ts`
+- Port: 3000
+- The server must run continuously when started.
+- Use the OPENAI_API_KEY environment variable.
+
+## Integrations
+- None
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo mcp_client_integration__JRv24UY > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent MCP Client Integration
+
+## Background
+VoltAgent supports the Model Context Protocol (MCP) to connect agents to external tools. You need to set up a VoltAgent application that connects to two local MCP servers (a math server and a string manipulation server) using the `stdio` transport, aggregates their tools, and provides them to a single agent.
+
+## Requirements
+- A Node.js project is already initialized in `/home/user/app` with these pinned, mutually-compatible dependencies installed: `@voltagent/core@^0.1.86`, `@voltagent/vercel-ai@^1.0.0`, `@ai-sdk/openai@^2.0.2`, `ai@^5.0.8`, `@modelcontextprotocol/sdk@^1.12`, `zod@^3.25`. **Do not change these versions** — they are known to be compatible with each other (AI SDK v5 + spec v2) and with `gpt-4o-mini`.
+- Two MCP servers are already provided in `/home/user/servers`: `math-server.js` and `string-server.js`.
+- Note: `@voltagent/vercel-ai` exports `VercelAIProvider` (capitalized) — use that exact name.
+- Create `/home/user/app/index.js` that:
+  1. Configures an MCP client to connect to both `math-server.js` and `string-server.js` via `stdio` (e.g., using `node /home/user/servers/math-server.js`).
+  2. Retrieves the tools from both servers.
+  3. Creates a VoltAgent `Agent` named `mcp-agent` equipped with these aggregated tools.
+  4. Exposes an async function `runAgent(prompt)` that takes a string prompt, runs the agent using `openai("gpt-4o-mini")`, and returns the text response.
+
+## Constraints
+- Project path: `/home/user/app`
+- MCP Servers path: `/home/user/servers`
+- You must use `stdio` transport for the MCP connections.
+- Export the `runAgent` function from `index.js` so it can be tested.
+- Ensure you handle the asynchronous connection to the MCP servers properly before executing the agent.
+EOF
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo memory_libsql_turso__ZG7WXPq > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: mkdir -p /logs/artifacts
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model  openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Preserving your work
+
+Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
+
+---
+
+# VoltAgent with LibSQL Memory
+
+## Background
+VoltAgent supports persistent memory using LibSQL. You need to create a simple agent script that wires up the LibSQL memory adapter from `@voltagent/libsql` (exported as `LibSQLStorage` in older versions, `LibSQLMemoryAdapter` in current versions — use whichever your installed version provides).
+
+## Requirements
+- Initialize a new Node.js project in `/home/user/agent-app`.
+- Install `@voltagent/core`, `@voltagent/libsql`, `@ai-sdk/openai`, and any required dependencies for LibSQL.
+- Create `index.ts` that defines an `Agent` using the LibSQL memory adapter (`LibSQLStorage` or `LibSQLMemoryAdapter`) with the URL `file:memory.db`.
+- The agent should have the name `MemoryAgent` and instructions `You remember things.`.
+- Add a script to `package.json` to run `index.ts` (e.g., using `tsx` or `ts-node`).
+
+## Implementation Guide
+1. `mkdir -p /home/user/agent-app && cd /home/user/agent-app`
+2. `npm init -y`
+3. Install `@voltagent/core`, `@ai-sdk/openai`, `zod`, and `tsx`.
+4. Write `index.ts` with the agent definition.
+
+## Constraints
+- Project path: `/home/user/agent-app`
+- The database file must be created at `/home/user/agent-app/memory.db` after running the agent.
+- `index.ts` must call `process.exit(0)` after the work completes. `new VoltAgent(...)` registers signal handlers / async resources that keep Node's event loop alive; without an explicit exit the script will hang forever.
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.

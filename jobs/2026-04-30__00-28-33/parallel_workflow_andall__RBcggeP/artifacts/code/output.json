@@ -1,0 +1,22 @@
+{
+  "executionId": "fade07b3-a713-4f03-a639-2dfe263bd2e7",
+  "workflowId": "parallel-workflow",
+  "startAt": "2026-04-30T07:37:29.091Z",
+  "endAt": "2026-04-30T07:37:29.092Z",
+  "status": "completed",
+  "result": [
+    {
+      "sentiment": "Analyzed sentiment of: VoltAgent is a powerful framework for building AI agents."
+    },
+    {
+      "keywords": [
+        "Analyzed keywords of: VoltAgent is a powerful framework for building AI agents."
+      ]
+    }
+  ],
+  "usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  }
+}

@@ -1,0 +1,102 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 8,
+            "failed": 0,
+            "skipped": 1,
+            "pending": 0,
+            "other": 0,
+            "start": 1777508211.4147,
+            "stop": 1777508217.0741713
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_exists",
+                "status": "passed",
+                "duration": 5.632306690036785,
+                "start": 1777508211.4221127,
+                "stop": 1777508217.0566368,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_onstart",
+                "status": "passed",
+                "duration": 0.0017808129778131843,
+                "start": 1777508217.0574675,
+                "stop": 1777508217.0599644,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_ontoolstart",
+                "status": "passed",
+                "duration": 0.001276594994124025,
+                "start": 1777508217.0604253,
+                "stop": 1777508217.0622983,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_ontoolend",
+                "status": "passed",
+                "duration": 0.0013636330259032547,
+                "start": 1777508217.062662,
+                "stop": 1777508217.0646777,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_onend",
+                "status": "passed",
+                "duration": 0.0011513330391608179,
+                "start": 1777508217.0649276,
+                "stop": 1777508217.066535,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_order",
+                "status": "passed",
+                "duration": 0.0012838069815188646,
+                "start": 1777508217.0667658,
+                "stop": 1777508217.0685608,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_tool_actually_invoked_once_per_call",
+                "status": "passed",
+                "duration": 0.0008301930502057076,
+                "start": 1777508217.0688026,
+                "stop": 1777508217.0699618,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_js_uses_tool_and_hooks",
+                "status": "passed",
+                "duration": 0.0013117770431563258,
+                "start": 1777508217.0701582,
+                "stop": 1777508217.0718155,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_generate_text_result_reflects_sum",
+                "status": "skipped",
+                "duration": 0.0009785500587895513,
+                "start": 1777508217.0720184,
+                "stop": 1777508217.0736465,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "('/tests/test_final_state.py', 201, 'Skipped: No run-stdout.txt / result.txt emitted by index.js; skipping output-value check.')"
+            }
+        ]
+    }
+}

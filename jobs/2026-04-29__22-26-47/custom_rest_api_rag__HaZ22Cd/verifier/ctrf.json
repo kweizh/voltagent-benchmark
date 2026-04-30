@@ -1,0 +1,44 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 0,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1777530731.6397736,
+            "stop": 1777530732.0106568
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_npm_test_passes",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.3611800650251098,
+                "start": 1777530731.6433756,
+                "stop": 1777530732.0093925,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_npm_test_passes():\n        \"\"\"Priority 1: Use npm test to verify the implementation.\"\"\"\n        try:\n            result = subprocess.run(\n                [\"npm\", \"test\"],\n                cwd=PROJECT_DIR,\n                capture_output=True,\n                text=True,\n                timeout=NPM_TEST_TIMEOUT_SEC,\n            )\n        except subprocess.TimeoutExpired as e:\n            pytest.fail(\n                f\"npm test timed out after {NPM_TEST_TIMEOUT_SEC}s. \"\n                f\"stdout: {e.stdout!r}\\nstderr: {e.stderr!r}\"\n            )\n>       assert result.returncode == 0, f\"'npm test' failed: {result.stderr}\\n{result.stdout}\"\nE       AssertionError: 'npm test' failed: \u23af\u23af\u23af\u23af\u23af\u23af Failed Suites 1 \u23af\u23af\u23af\u23af\u23af\u23af\u23af\nE         \nE          FAIL  test/retriever.test.ts [ test/retriever.test.ts ]\nE         Error: Failed to load url ../src/retriever.js (resolved id: ../src/retriever.js) in /home/user/voltagent-project/test/retriever.test.ts. Does the file exist?\nE          \u276f loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17\nE         \nE         \u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af[1/1]\u23af\nE         \nE         \nE         \nE         > test\nE         > vitest run\nE         \nE         \nE          RUN  v1.6.1 /home/user/voltagent-project\nE         \nE          \u276f test/retriever.test.ts  (0 test)\nE         \nE          Test Files  1 failed (1)\nE               Tests  no tests\nE            Start at  06:32:11\nE            Duration  101ms (transform 21ms, setup 0ms, collect 0ms, tests 0ms, environment 0ms, prepare 30ms)\nE         \nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['npm', 'test'], returncode=1, stdout='\\n> test\\n> vitest run\\n\\n\\n RUN  v1.6.1 /home/user/volta... \u276f loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17\\n\\n\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af[1/1]\u23af\\n\\n').returncode\n\ntests/test_final_state.py:24: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_retriever_file_exists",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0003317599184811115,
+                "start": 1777530732.0094955,
+                "stop": 1777530732.0105293,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_retriever_file_exists():\n        \"\"\"Priority 3 fallback: basic file existence check.\"\"\"\n        retriever_path = os.path.join(PROJECT_DIR, \"src\", \"retriever.ts\")\n>       assert os.path.isfile(retriever_path), f\"File {retriever_path} does not exist.\"\nE       AssertionError: File /home/user/voltagent-project/src/retriever.ts does not exist.\nE       assert False\nE        +  where False = <function isfile at 0xe657ff470220>('/home/user/voltagent-project/src/retriever.ts')\nE        +    where <function isfile at 0xe657ff470220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:30: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

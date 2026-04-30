@@ -1,0 +1,40 @@
+{
+  "executionId": "f6c11589-c3ae-42d5-aac1-6d3325bb8952",
+  "workflowId": "parallel-workflow",
+  "status": "completed",
+  "startAt": "2026-04-30T00:23:54.213Z",
+  "endAt": "2026-04-30T00:23:57.046Z",
+  "input": "VoltAgent is a powerful TypeScript framework for building AI-powered multi-agent systems. It provides composable workflow primitives like andThen, andAll, andRace and andAgent that make it straightforward to orchestrate complex parallel and sequential AI pipelines.",
+  "result": {
+    "input": "VoltAgent is a powerful TypeScript framework for building AI-powered multi-agent systems. It provides composable workflow primitives like andThen, andAll, andRace and andAgent that make it straightforward to orchestrate complex parallel and sequential AI pipelines.",
+    "wordCount": 34,
+    "charCount": 265,
+    "sentimentResult": {
+      "sentiment": "positive",
+      "confidence": 0.9
+    },
+    "keywordsResult": {
+      "keywords": [
+        "VoltAgent",
+        "TypeScript framework",
+        "AI-powered",
+        "multi-agent systems",
+        "composable workflow primitives",
+        "andThen",
+        "andAll",
+        "andRace",
+        "andAgent",
+        "orchestrate",
+        "complex pipelines",
+        "parallel",
+        "sequential"
+      ]
+    },
+    "summary": "Text has 34 word(s) and 265 character(s). Sentiment: positive (confidence: 90%). Top keywords: VoltAgent, TypeScript framework, AI-powered, multi-agent systems, composable workflow primitives."
+  },
+  "usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  }
+}

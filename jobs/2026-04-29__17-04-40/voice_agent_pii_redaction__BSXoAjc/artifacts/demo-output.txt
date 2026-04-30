@@ -1,0 +1,17 @@
+=== VoltAgent PII Redaction Demo ===
+
+ORIGINAL : Hi, my name is Jane Doe and my email is jane.doe@example.com.
+REDACTED : Hi, my name is [REDACTED] and my email is [REDACTED].
+
+ORIGINAL : Please call John Smith at +1-800-555-0199 or 555.867.5309.
+REDACTED : Please call [REDACTED] at [REDACTED] or 555.867.[REDACTED].
+
+ORIGINAL : My SSN is 123-45-6789 and my card number is 4111 1111 1111 1111.
+REDACTED : My SSN is [REDACTED] and my card number is [REDACTED].
+
+ORIGINAL : The server IP is 192.168.1.42, account number 987654321.
+REDACTED : The server IP is [REDACTED], account number [REDACTED].
+
+ORIGINAL : No sensitive data here — just a normal sentence.
+REDACTED : No sensitive data here — just a normal sentence.
+

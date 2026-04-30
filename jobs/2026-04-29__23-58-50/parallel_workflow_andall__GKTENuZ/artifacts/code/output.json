@@ -1,0 +1,16 @@
+{
+  "executionId": "6da1e502-466c-4b7a-8664-c5959fee8762",
+  "workflowId": "parallel-workflow",
+  "startAt": "2026-04-30T07:17:00.510Z",
+  "endAt": "2026-04-30T07:17:02.228Z",
+  "status": "completed",
+  "result": {
+    "analysis1": "Basic analysis: 17 characters",
+    "analysis2": "The phrase 'Test input string' suggests a placeholder or example used in programming or data processing to demonstrate functionality or structure."
+  },
+  "usage": {
+    "promptTokens": 58,
+    "completionTokens": 30,
+    "totalTokens": 88
+  }
+}

@@ -1,0 +1,129 @@
+downloading uv 0.9.7 aarch64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 7ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+tests/test_final_state.py FF                                             [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_math_server_tool_usage __________________________
+
+    def test_math_server_tool_usage():
+        """Priority 3: Verify the agent uses the math server's tool to multiply."""
+    
+        test_script_path = os.path.join(PROJECT_DIR, "test_math.js")
+        with open(test_script_path, "w") as f:
+            f.write("""
+    import { runAgent } from './index.js';
+    
+    async function main() {
+      const result = await runAgent("What is 15 multiplied by 4?");
+      if (result.includes("60")) {
+        console.log("MATH_SUCCESS");
+      } else {
+        console.error("Result was:", result);
+        process.exit(1);
+      }
+    }
+    main().then(
+      () => process.exit(0),
+      (e) => { console.error(e); process.exit(1); },
+    );
+    """)
+    
+        result = _run_node("test_math.js")
+    
+>       assert result.returncode == 0, f"Math test script failed: {result.stderr}"
+E       AssertionError: Math test script failed: node:internal/modules/esm/resolve:283
+E             throw new ERR_MODULE_NOT_FOUND(
+E                   ^
+E         
+E         Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/user/app/index.js' imported from /home/user/app/test_math.js
+E             at finalizeResolution (node:internal/modules/esm/resolve:283:11)
+E             at moduleResolve (node:internal/modules/esm/resolve:952:10)
+E             at defaultResolve (node:internal/modules/esm/resolve:1188:11)
+E             at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)
+E             at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)
+E             at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)
+E             at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
+E             at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
+E           code: 'ERR_MODULE_NOT_FOUND',
+E           url: 'file:///home/user/app/index.js'
+E         }
+E         
+E         Node.js v20.20.2
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['node', 'test_math.js'], returncode=1, stdout='', stderr="node:internal/modules/esm/resolve:283...dule_job:168:49) {\n  code: 'ERR_MODULE_NOT_FOUND',\n  url: 'file:///home/user/app/index.js'\n}\n\nNode.js v20.20.2\n").returncode
+
+tests/test_final_state.py:57: AssertionError
+________________________ test_string_server_tool_usage _________________________
+
+    def test_string_server_tool_usage():
+        """Priority 3: Verify the agent uses the string server's tool to reverse a string."""
+    
+        test_script_path = os.path.join(PROJECT_DIR, "test_string.js")
+        with open(test_script_path, "w") as f:
+            f.write("""
+    import { runAgent } from './index.js';
+    
+    async function main() {
+      const result = await runAgent("Reverse the string 'voltagent'");
+      if (result.toLowerCase().includes("tnegatlov")) {
+        console.log("STRING_SUCCESS");
+      } else {
+        console.error("Result was:", result);
+        process.exit(1);
+      }
+    }
+    main().then(
+      () => process.exit(0),
+      (e) => { console.error(e); process.exit(1); },
+    );
+    """)
+    
+        result = _run_node("test_string.js")
+    
+>       assert result.returncode == 0, f"String test script failed: {result.stderr}"
+E       AssertionError: String test script failed: node:internal/modules/esm/resolve:283
+E             throw new ERR_MODULE_NOT_FOUND(
+E                   ^
+E         
+E         Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/user/app/index.js' imported from /home/user/app/test_string.js
+E             at finalizeResolution (node:internal/modules/esm/resolve:283:11)
+E             at moduleResolve (node:internal/modules/esm/resolve:952:10)
+E             at defaultResolve (node:internal/modules/esm/resolve:1188:11)
+E             at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)
+E             at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)
+E             at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)
+E             at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
+E             at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
+E           code: 'ERR_MODULE_NOT_FOUND',
+E           url: 'file:///home/user/app/index.js'
+E         }
+E         
+E         Node.js v20.20.2
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['node', 'test_string.js'], returncode=1, stdout='', stderr="node:internal/modules/esm/resolve:2...dule_job:168:49) {\n  code: 'ERR_MODULE_NOT_FOUND',\n  url: 'file:///home/user/app/index.js'\n}\n\nNode.js v20.20.2\n").returncode
+
+tests/test_final_state.py:86: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_math_server_tool_usage - AssertionErro...
+FAILED tests/test_final_state.py::test_string_server_tool_usage - AssertionEr...
+============================== 2 failed in 0.11s ===============================

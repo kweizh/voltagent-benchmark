@@ -1,0 +1,91 @@
+downloading uv 0.9.7 aarch64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 7ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+tests/test_final_state.py .F                                             [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_db_file_created _____________________________
+
+    def test_db_file_created():
+        # Run the agent's script in the background and poll for the side-effect
+        # (memory.db). VoltAgent commonly leaks event-loop handles (signal
+        # handlers, async resources), so the script may never exit on its own
+        # even after the work is done. We don't require it to; we only require
+        # that the DB file appears, then we tear the process down.
+        if os.path.isfile(DB_FILE):
+            os.remove(DB_FILE)
+    
+        proc = subprocess.Popen(
+            ["npx", "tsx", "index.ts"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + TSX_RUN_TIMEOUT_SEC
+        db_appeared = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if os.path.isfile(DB_FILE) and os.path.getsize(DB_FILE) > 0:
+                    db_appeared = True
+                    break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                stdout, stderr = proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                stdout, stderr = "", ""
+    
+        if not db_appeared:
+            if early_exit_code is not None and early_exit_code != 0:
+                pytest.fail(
+                    f"index.ts exited with code {early_exit_code} before producing "
+                    f"{DB_FILE}.\nstdout: {stdout!r}\nstderr: {stderr!r}"
+                )
+>           pytest.fail(
+                f"Database file {DB_FILE} was not created within "
+                f"{TSX_RUN_TIMEOUT_SEC}s.\nstdout: {stdout!r}\nstderr: {stderr!r}"
+            )
+E           Failed: Database file /home/user/agent-app/memory.db was not created within 90s.
+E           stdout: 'Agent "MemoryAgent" initialized and registered with VoltAgent.\n'
+E           stderr: ''
+
+tests/test_final_state.py:76: Failed
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_index_file_exists
+FAILED tests/test_final_state.py::test_db_file_created - Failed: Database fil...
+========================= 1 failed, 1 passed in 1.04s ==========================

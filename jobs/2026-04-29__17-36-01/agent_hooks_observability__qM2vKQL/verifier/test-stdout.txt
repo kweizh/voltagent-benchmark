@@ -1,0 +1,93 @@
+downloading uv 0.9.7 aarch64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 8ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 9 items
+
+tests/test_final_state.py ..FF.FF.s                                      [100%]
+
+=================================== FAILURES ===================================
+______________________ test_log_file_contains_ontoolstart ______________________
+
+    def test_log_file_contains_ontoolstart():
+>       assert "HOOK: onToolStart - calculate_sum" in _read_log(), \
+            "Expected 'HOOK: onToolStart - calculate_sum' in hooks.log"
+E       AssertionError: Expected 'HOOK: onToolStart - calculate_sum' in hooks.log
+E       assert 'HOOK: onToolStart - calculate_sum' in 'HOOK: onStart\nHOOK: onEnd\n'
+E        +  where 'HOOK: onStart\nHOOK: onEnd\n' = _read_log()
+
+tests/test_final_state.py:124: AssertionError
+_______________________ test_log_file_contains_ontoolend _______________________
+
+    def test_log_file_contains_ontoolend():
+>       assert "HOOK: onToolEnd - calculate_sum" in _read_log(), \
+            "Expected 'HOOK: onToolEnd - calculate_sum' in hooks.log"
+E       AssertionError: Expected 'HOOK: onToolEnd - calculate_sum' in hooks.log
+E       assert 'HOOK: onToolEnd - calculate_sum' in 'HOOK: onStart\nHOOK: onEnd\n'
+E        +  where 'HOOK: onStart\nHOOK: onEnd\n' = _read_log()
+
+tests/test_final_state.py:129: AssertionError
+_____________________________ test_log_file_order ______________________________
+
+    def test_log_file_order():
+        lines = [line.strip() for line in _read_log().splitlines() if line.strip().startswith("HOOK:")]
+        expected_order = [
+            "HOOK: onStart",
+            "HOOK: onToolStart - calculate_sum",
+            "HOOK: onToolEnd - calculate_sum",
+            "HOOK: onEnd",
+        ]
+        actual_order = [line for line in lines if line in expected_order]
+        # The agent may invoke generateText more than once (e.g. retries, or a
+        # warm-up call). Accept any concatenation of complete 4-hook runs as long
+        # as every chunk preserves the expected order.
+        assert len(actual_order) > 0, "No expected hook lines found in log."
+>       assert len(actual_order) % len(expected_order) == 0, (
+            f"Hook log length {len(actual_order)} is not a multiple of "
+            f"{len(expected_order)} — got an incomplete run: {actual_order}"
+        )
+E       AssertionError: Hook log length 2 is not a multiple of 4 — got an incomplete run: ['HOOK: onStart', 'HOOK: onEnd']
+E       assert (2 % 4) == 0
+E        +  where 2 = len(['HOOK: onStart', 'HOOK: onEnd'])
+E        +  and   4 = len(['HOOK: onStart', 'HOOK: onToolStart - calculate_sum', 'HOOK: onToolEnd - calculate_sum', 'HOOK: onEnd'])
+
+tests/test_final_state.py:150: AssertionError
+___________________ test_tool_actually_invoked_once_per_call ___________________
+
+    def test_tool_actually_invoked_once_per_call():
+        """The tool hook pair must fire at least once, and counts must match —
+        hardcoded sums or skipped tool calls would break this."""
+        content = _read_log()
+        n_start = content.count("HOOK: onToolStart - calculate_sum")
+        n_end = content.count("HOOK: onToolEnd - calculate_sum")
+>       assert n_start >= 1, "calculate_sum tool was never started — agent likely hardcoded the result."
+E       AssertionError: calculate_sum tool was never started — agent likely hardcoded the result.
+E       assert 0 >= 1
+
+tests/test_final_state.py:168: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_log_file_exists
+PASSED tests/test_final_state.py::test_log_file_contains_onstart
+PASSED tests/test_final_state.py::test_log_file_contains_onend
+PASSED tests/test_final_state.py::test_index_js_uses_tool_and_hooks
+SKIPPED [1] tests/test_final_state.py:201: No run-stdout.txt / result.txt emitted by index.js; skipping output-value check.
+FAILED tests/test_final_state.py::test_log_file_contains_ontoolstart - Assert...
+FAILED tests/test_final_state.py::test_log_file_contains_ontoolend - Assertio...
+FAILED tests/test_final_state.py::test_log_file_order - AssertionError: Hook ...
+FAILED tests/test_final_state.py::test_tool_actually_invoked_once_per_call - ...
+==================== 4 failed, 4 passed, 1 skipped in 2.68s ====================

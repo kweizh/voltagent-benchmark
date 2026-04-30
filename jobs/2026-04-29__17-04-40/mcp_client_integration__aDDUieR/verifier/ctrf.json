@@ -1,0 +1,44 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 0,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1777508585.9460926,
+            "stop": 1777508586.0602138
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_math_server_tool_usage",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.08924278593622148,
+                "start": 1777508585.9500382,
+                "stop": 1777508586.044302,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_math_server_tool_usage():\n        \"\"\"Priority 3: Verify the agent uses the math server's tool to multiply.\"\"\"\n    \n        test_script_path = os.path.join(PROJECT_DIR, \"test_math.js\")\n        with open(test_script_path, \"w\") as f:\n            f.write(\"\"\"\n    import { runAgent } from './index.js';\n    \n    async function main() {\n      const result = await runAgent(\"What is 15 multiplied by 4?\");\n      if (result.includes(\"60\")) {\n        console.log(\"MATH_SUCCESS\");\n      } else {\n        console.error(\"Result was:\", result);\n        process.exit(1);\n      }\n    }\n    main().then(\n      () => process.exit(0),\n      (e) => { console.error(e); process.exit(1); },\n    );\n    \"\"\")\n    \n        result = _run_node(\"test_math.js\")\n    \n>       assert result.returncode == 0, f\"Math test script failed: {result.stderr}\"\nE       AssertionError: Math test script failed: node:internal/modules/esm/resolve:283\nE             throw new ERR_MODULE_NOT_FOUND(\nE                   ^\nE         \nE         Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/user/app/index.js' imported from /home/user/app/test_math.js\nE             at finalizeResolution (node:internal/modules/esm/resolve:283:11)\nE             at moduleResolve (node:internal/modules/esm/resolve:952:10)\nE             at defaultResolve (node:internal/modules/esm/resolve:1188:11)\nE             at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\nE             at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\nE             at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\nE             at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\nE             at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {\nE           code: 'ERR_MODULE_NOT_FOUND',\nE           url: 'file:///home/user/app/index.js'\nE         }\nE         \nE         Node.js v20.20.2\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['node', 'test_math.js'], returncode=1, stdout='', stderr=\"node:internal/modules/esm/resolve:283...dule_job:168:49) {\\n  code: 'ERR_MODULE_NOT_FOUND',\\n  url: 'file:///home/user/app/index.js'\\n}\\n\\nNode.js v20.20.2\\n\").returncode\n\ntests/test_final_state.py:57: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_string_server_tool_usage",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.014614581014029682,
+                "start": 1777508586.0443895,
+                "stop": 1777508586.0600395,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_string_server_tool_usage():\n        \"\"\"Priority 3: Verify the agent uses the string server's tool to reverse a string.\"\"\"\n    \n        test_script_path = os.path.join(PROJECT_DIR, \"test_string.js\")\n        with open(test_script_path, \"w\") as f:\n            f.write(\"\"\"\n    import { runAgent } from './index.js';\n    \n    async function main() {\n      const result = await runAgent(\"Reverse the string 'voltagent'\");\n      if (result.toLowerCase().includes(\"tnegatlov\")) {\n        console.log(\"STRING_SUCCESS\");\n      } else {\n        console.error(\"Result was:\", result);\n        process.exit(1);\n      }\n    }\n    main().then(\n      () => process.exit(0),\n      (e) => { console.error(e); process.exit(1); },\n    );\n    \"\"\")\n    \n        result = _run_node(\"test_string.js\")\n    \n>       assert result.returncode == 0, f\"String test script failed: {result.stderr}\"\nE       AssertionError: String test script failed: node:internal/modules/esm/resolve:283\nE             throw new ERR_MODULE_NOT_FOUND(\nE                   ^\nE         \nE         Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/user/app/index.js' imported from /home/user/app/test_string.js\nE             at finalizeResolution (node:internal/modules/esm/resolve:283:11)\nE             at moduleResolve (node:internal/modules/esm/resolve:952:10)\nE             at defaultResolve (node:internal/modules/esm/resolve:1188:11)\nE             at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)\nE             at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)\nE             at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)\nE             at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)\nE             at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {\nE           code: 'ERR_MODULE_NOT_FOUND',\nE           url: 'file:///home/user/app/index.js'\nE         }\nE         \nE         Node.js v20.20.2\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['node', 'test_string.js'], returncode=1, stdout='', stderr=\"node:internal/modules/esm/resolve:2...dule_job:168:49) {\\n  code: 'ERR_MODULE_NOT_FOUND',\\n  url: 'file:///home/user/app/index.js'\\n}\\n\\nNode.js v20.20.2\\n\").returncode\n\ntests/test_final_state.py:86: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

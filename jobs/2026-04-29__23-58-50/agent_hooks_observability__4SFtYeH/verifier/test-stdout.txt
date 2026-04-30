@@ -1,0 +1,700 @@
+downloading uv 0.9.7 aarch64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 13ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 9 items
+
+tests/test_final_state.py EEEEEEEEE                                      [100%]
+
+==================================== ERRORS ====================================
+____________________ ERROR at setup of test_log_file_exists ____________________
+
+    @pytest.fixture(scope="module", autouse=True)
+    def setup_and_run_agent():
+        # Install dependencies
+        try:
+            install_result = subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                capture_output=True,
+                text=True,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s: {e.stderr!r}")
+        assert install_result.returncode == 0, f"npm install failed: {install_result.stderr}"
+    
+        # Run the agent's script in the background and poll for the side-effect
+        # (hooks.log with all four expected markers). VoltAgent commonly leaks
+        # event-loop handles, so the script may never exit on its own. We don't
+        # require clean termination — we require the log to land, then we kill it.
+        if os.path.isfile(LOG_FILE):
+            os.remove(LOG_FILE)
+    
+        env = os.environ.copy()
+        proc = subprocess.Popen(
+            ["node", "index.js"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=env,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + NODE_RUN_TIMEOUT_SEC
+        log_complete = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if _log_complete(LOG_FILE):
+                    log_complete = True
+                    # Give the script a brief grace window so any trailing log
+                    # entries (e.g. onEnd flushed slightly after) are written.
+                    time.sleep(1.0)
+                    break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                pass
+    
+        if not log_complete and early_exit_code not in (None, 0):
+>           pytest.fail(
+                f"node index.js exited with code {early_exit_code} before producing "
+                f"a complete {LOG_FILE}."
+            )
+E           Failed: node index.js exited with code 1 before producing a complete /home/user/app/hooks.log.
+
+tests/test_final_state.py:100: Failed
+_______________ ERROR at setup of test_log_file_contains_onstart _______________
+
+    @pytest.fixture(scope="module", autouse=True)
+    def setup_and_run_agent():
+        # Install dependencies
+        try:
+            install_result = subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                capture_output=True,
+                text=True,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s: {e.stderr!r}")
+        assert install_result.returncode == 0, f"npm install failed: {install_result.stderr}"
+    
+        # Run the agent's script in the background and poll for the side-effect
+        # (hooks.log with all four expected markers). VoltAgent commonly leaks
+        # event-loop handles, so the script may never exit on its own. We don't
+        # require clean termination — we require the log to land, then we kill it.
+        if os.path.isfile(LOG_FILE):
+            os.remove(LOG_FILE)
+    
+        env = os.environ.copy()
+        proc = subprocess.Popen(
+            ["node", "index.js"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=env,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + NODE_RUN_TIMEOUT_SEC
+        log_complete = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if _log_complete(LOG_FILE):
+                    log_complete = True
+                    # Give the script a brief grace window so any trailing log
+                    # entries (e.g. onEnd flushed slightly after) are written.
+                    time.sleep(1.0)
+                    break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                pass
+    
+        if not log_complete and early_exit_code not in (None, 0):
+>           pytest.fail(
+                f"node index.js exited with code {early_exit_code} before producing "
+                f"a complete {LOG_FILE}."
+            )
+E           Failed: node index.js exited with code 1 before producing a complete /home/user/app/hooks.log.
+
+tests/test_final_state.py:100: Failed
+_____________ ERROR at setup of test_log_file_contains_ontoolstart _____________
+
+    @pytest.fixture(scope="module", autouse=True)
+    def setup_and_run_agent():
+        # Install dependencies
+        try:
+            install_result = subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                capture_output=True,
+                text=True,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s: {e.stderr!r}")
+        assert install_result.returncode == 0, f"npm install failed: {install_result.stderr}"
+    
+        # Run the agent's script in the background and poll for the side-effect
+        # (hooks.log with all four expected markers). VoltAgent commonly leaks
+        # event-loop handles, so the script may never exit on its own. We don't
+        # require clean termination — we require the log to land, then we kill it.
+        if os.path.isfile(LOG_FILE):
+            os.remove(LOG_FILE)
+    
+        env = os.environ.copy()
+        proc = subprocess.Popen(
+            ["node", "index.js"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=env,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + NODE_RUN_TIMEOUT_SEC
+        log_complete = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if _log_complete(LOG_FILE):
+                    log_complete = True
+                    # Give the script a brief grace window so any trailing log
+                    # entries (e.g. onEnd flushed slightly after) are written.
+                    time.sleep(1.0)
+                    break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                pass
+    
+        if not log_complete and early_exit_code not in (None, 0):
+>           pytest.fail(
+                f"node index.js exited with code {early_exit_code} before producing "
+                f"a complete {LOG_FILE}."
+            )
+E           Failed: node index.js exited with code 1 before producing a complete /home/user/app/hooks.log.
+
+tests/test_final_state.py:100: Failed
+______________ ERROR at setup of test_log_file_contains_ontoolend ______________
+
+    @pytest.fixture(scope="module", autouse=True)
+    def setup_and_run_agent():
+        # Install dependencies
+        try:
+            install_result = subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                capture_output=True,
+                text=True,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s: {e.stderr!r}")
+        assert install_result.returncode == 0, f"npm install failed: {install_result.stderr}"
+    
+        # Run the agent's script in the background and poll for the side-effect
+        # (hooks.log with all four expected markers). VoltAgent commonly leaks
+        # event-loop handles, so the script may never exit on its own. We don't
+        # require clean termination — we require the log to land, then we kill it.
+        if os.path.isfile(LOG_FILE):
+            os.remove(LOG_FILE)
+    
+        env = os.environ.copy()
+        proc = subprocess.Popen(
+            ["node", "index.js"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=env,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + NODE_RUN_TIMEOUT_SEC
+        log_complete = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if _log_complete(LOG_FILE):
+                    log_complete = True
+                    # Give the script a brief grace window so any trailing log
+                    # entries (e.g. onEnd flushed slightly after) are written.
+                    time.sleep(1.0)
+                    break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                pass
+    
+        if not log_complete and early_exit_code not in (None, 0):
+>           pytest.fail(
+                f"node index.js exited with code {early_exit_code} before producing "
+                f"a complete {LOG_FILE}."
+            )
+E           Failed: node index.js exited with code 1 before producing a complete /home/user/app/hooks.log.
+
+tests/test_final_state.py:100: Failed
+________________ ERROR at setup of test_log_file_contains_onend ________________
+
+    @pytest.fixture(scope="module", autouse=True)
+    def setup_and_run_agent():
+        # Install dependencies
+        try:
+            install_result = subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                capture_output=True,
+                text=True,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s: {e.stderr!r}")
+        assert install_result.returncode == 0, f"npm install failed: {install_result.stderr}"
+    
+        # Run the agent's script in the background and poll for the side-effect
+        # (hooks.log with all four expected markers). VoltAgent commonly leaks
+        # event-loop handles, so the script may never exit on its own. We don't
+        # require clean termination — we require the log to land, then we kill it.
+        if os.path.isfile(LOG_FILE):
+            os.remove(LOG_FILE)
+    
+        env = os.environ.copy()
+        proc = subprocess.Popen(
+            ["node", "index.js"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=env,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + NODE_RUN_TIMEOUT_SEC
+        log_complete = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if _log_complete(LOG_FILE):
+                    log_complete = True
+                    # Give the script a brief grace window so any trailing log
+                    # entries (e.g. onEnd flushed slightly after) are written.
+                    time.sleep(1.0)
+                    break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                pass
+    
+        if not log_complete and early_exit_code not in (None, 0):
+>           pytest.fail(
+                f"node index.js exited with code {early_exit_code} before producing "
+                f"a complete {LOG_FILE}."
+            )
+E           Failed: node index.js exited with code 1 before producing a complete /home/user/app/hooks.log.
+
+tests/test_final_state.py:100: Failed
+____________________ ERROR at setup of test_log_file_order _____________________
+
+    @pytest.fixture(scope="module", autouse=True)
+    def setup_and_run_agent():
+        # Install dependencies
+        try:
+            install_result = subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                capture_output=True,
+                text=True,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s: {e.stderr!r}")
+        assert install_result.returncode == 0, f"npm install failed: {install_result.stderr}"
+    
+        # Run the agent's script in the background and poll for the side-effect
+        # (hooks.log with all four expected markers). VoltAgent commonly leaks
+        # event-loop handles, so the script may never exit on its own. We don't
+        # require clean termination — we require the log to land, then we kill it.
+        if os.path.isfile(LOG_FILE):
+            os.remove(LOG_FILE)
+    
+        env = os.environ.copy()
+        proc = subprocess.Popen(
+            ["node", "index.js"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=env,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + NODE_RUN_TIMEOUT_SEC
+        log_complete = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if _log_complete(LOG_FILE):
+                    log_complete = True
+                    # Give the script a brief grace window so any trailing log
+                    # entries (e.g. onEnd flushed slightly after) are written.
+                    time.sleep(1.0)
+                    break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                pass
+    
+        if not log_complete and early_exit_code not in (None, 0):
+>           pytest.fail(
+                f"node index.js exited with code {early_exit_code} before producing "
+                f"a complete {LOG_FILE}."
+            )
+E           Failed: node index.js exited with code 1 before producing a complete /home/user/app/hooks.log.
+
+tests/test_final_state.py:100: Failed
+__________ ERROR at setup of test_tool_actually_invoked_once_per_call __________
+
+    @pytest.fixture(scope="module", autouse=True)
+    def setup_and_run_agent():
+        # Install dependencies
+        try:
+            install_result = subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                capture_output=True,
+                text=True,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s: {e.stderr!r}")
+        assert install_result.returncode == 0, f"npm install failed: {install_result.stderr}"
+    
+        # Run the agent's script in the background and poll for the side-effect
+        # (hooks.log with all four expected markers). VoltAgent commonly leaks
+        # event-loop handles, so the script may never exit on its own. We don't
+        # require clean termination — we require the log to land, then we kill it.
+        if os.path.isfile(LOG_FILE):
+            os.remove(LOG_FILE)
+    
+        env = os.environ.copy()
+        proc = subprocess.Popen(
+            ["node", "index.js"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=env,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + NODE_RUN_TIMEOUT_SEC
+        log_complete = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if _log_complete(LOG_FILE):
+                    log_complete = True
+                    # Give the script a brief grace window so any trailing log
+                    # entries (e.g. onEnd flushed slightly after) are written.
+                    time.sleep(1.0)
+                    break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                pass
+    
+        if not log_complete and early_exit_code not in (None, 0):
+>           pytest.fail(
+                f"node index.js exited with code {early_exit_code} before producing "
+                f"a complete {LOG_FILE}."
+            )
+E           Failed: node index.js exited with code 1 before producing a complete /home/user/app/hooks.log.
+
+tests/test_final_state.py:100: Failed
+_____________ ERROR at setup of test_index_js_uses_tool_and_hooks ______________
+
+    @pytest.fixture(scope="module", autouse=True)
+    def setup_and_run_agent():
+        # Install dependencies
+        try:
+            install_result = subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                capture_output=True,
+                text=True,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s: {e.stderr!r}")
+        assert install_result.returncode == 0, f"npm install failed: {install_result.stderr}"
+    
+        # Run the agent's script in the background and poll for the side-effect
+        # (hooks.log with all four expected markers). VoltAgent commonly leaks
+        # event-loop handles, so the script may never exit on its own. We don't
+        # require clean termination — we require the log to land, then we kill it.
+        if os.path.isfile(LOG_FILE):
+            os.remove(LOG_FILE)
+    
+        env = os.environ.copy()
+        proc = subprocess.Popen(
+            ["node", "index.js"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=env,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + NODE_RUN_TIMEOUT_SEC
+        log_complete = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if _log_complete(LOG_FILE):
+                    log_complete = True
+                    # Give the script a brief grace window so any trailing log
+                    # entries (e.g. onEnd flushed slightly after) are written.
+                    time.sleep(1.0)
+                    break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                pass
+    
+        if not log_complete and early_exit_code not in (None, 0):
+>           pytest.fail(
+                f"node index.js exited with code {early_exit_code} before producing "
+                f"a complete {LOG_FILE}."
+            )
+E           Failed: node index.js exited with code 1 before producing a complete /home/user/app/hooks.log.
+
+tests/test_final_state.py:100: Failed
+___________ ERROR at setup of test_generate_text_result_reflects_sum ___________
+
+    @pytest.fixture(scope="module", autouse=True)
+    def setup_and_run_agent():
+        # Install dependencies
+        try:
+            install_result = subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                capture_output=True,
+                text=True,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s: {e.stderr!r}")
+        assert install_result.returncode == 0, f"npm install failed: {install_result.stderr}"
+    
+        # Run the agent's script in the background and poll for the side-effect
+        # (hooks.log with all four expected markers). VoltAgent commonly leaks
+        # event-loop handles, so the script may never exit on its own. We don't
+        # require clean termination — we require the log to land, then we kill it.
+        if os.path.isfile(LOG_FILE):
+            os.remove(LOG_FILE)
+    
+        env = os.environ.copy()
+        proc = subprocess.Popen(
+            ["node", "index.js"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=env,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + NODE_RUN_TIMEOUT_SEC
+        log_complete = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if _log_complete(LOG_FILE):
+                    log_complete = True
+                    # Give the script a brief grace window so any trailing log
+                    # entries (e.g. onEnd flushed slightly after) are written.
+                    time.sleep(1.0)
+                    break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                pass
+    
+        if not log_complete and early_exit_code not in (None, 0):
+>           pytest.fail(
+                f"node index.js exited with code {early_exit_code} before producing "
+                f"a complete {LOG_FILE}."
+            )
+E           Failed: node index.js exited with code 1 before producing a complete /home/user/app/hooks.log.
+
+tests/test_final_state.py:100: Failed
+=========================== short test summary info ============================
+ERROR tests/test_final_state.py::test_log_file_exists - Failed: node index.js...
+ERROR tests/test_final_state.py::test_log_file_contains_onstart - Failed: nod...
+ERROR tests/test_final_state.py::test_log_file_contains_ontoolstart - Failed:...
+ERROR tests/test_final_state.py::test_log_file_contains_ontoolend - Failed: n...
+ERROR tests/test_final_state.py::test_log_file_contains_onend - Failed: node ...
+ERROR tests/test_final_state.py::test_log_file_order - Failed: node index.js ...
+ERROR tests/test_final_state.py::test_tool_actually_invoked_once_per_call - F...
+ERROR tests/test_final_state.py::test_index_js_uses_tool_and_hooks - Failed: ...
+ERROR tests/test_final_state.py::test_generate_text_result_reflects_sum - Fai...
+============================== 9 errors in 9.58s ===============================

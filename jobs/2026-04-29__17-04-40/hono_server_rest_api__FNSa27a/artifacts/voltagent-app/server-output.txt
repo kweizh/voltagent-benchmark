@@ -1,0 +1,15 @@
+Server startup output:
+══════════════════════════════════════════════════
+  VOLTAGENT SERVER STARTED SUCCESSFULLY
+══════════════════════════════════════════════════
+  ✓ HTTP Server:   http://localhost:3000
+  ✓ Swagger UI:    http://localhost:3000/ui
+
+  ✓ Registered Endpoints: 2 total
+
+    Custom Endpoints (2)
+      GET    /api/status
+
+Endpoint test:
+$ curl -s http://localhost:3000/api/status
+{"status":"running"}

@@ -1,0 +1,615 @@
+{
+  "steps": [
+    {
+      "stepNumber": 0,
+      "model": {
+        "provider": "openai.responses",
+        "modelId": "gpt-4o-mini"
+      },
+      "content": [
+        {
+          "type": "tool-call",
+          "toolCallId": "call_HgQsFl7kzZZTceQYeJrLBT9q",
+          "toolName": "get_weather",
+          "input": {
+            "city": "London"
+          },
+          "providerMetadata": {
+            "openai": {
+              "itemId": "fc_04fed7a0b95bcc0d0069f2ff0f151c819096721479958b5aef"
+            }
+          }
+        },
+        {
+          "type": "tool-result",
+          "toolCallId": "call_HgQsFl7kzZZTceQYeJrLBT9q",
+          "toolName": "get_weather",
+          "input": {
+            "city": "London"
+          },
+          "output": {
+            "weather": "sunny",
+            "temperature": 22,
+            "city": "London"
+          },
+          "dynamic": false,
+          "providerMetadata": {
+            "openai": {
+              "itemId": "fc_04fed7a0b95bcc0d0069f2ff0f151c819096721479958b5aef"
+            }
+          }
+        }
+      ],
+      "finishReason": "tool-calls",
+      "usage": {
+        "inputTokens": 65,
+        "inputTokenDetails": {
+          "noCacheTokens": 65,
+          "cacheReadTokens": 0
+        },
+        "outputTokens": 15,
+        "outputTokenDetails": {
+          "textTokens": 15,
+          "reasoningTokens": 0
+        },
+        "totalTokens": 80,
+        "raw": {
+          "input_tokens": 65,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 15,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "reasoningTokens": 0,
+        "cachedInputTokens": 0
+      },
+      "warnings": [],
+      "request": {
+        "body": {
+          "model": "gpt-4o-mini",
+          "input": [
+            {
+              "role": "system",
+              "content": "You are a helpful weather assistant."
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "What is the weather in London?"
+                }
+              ]
+            }
+          ],
+          "tools": [
+            {
+              "type": "function",
+              "name": "get_weather",
+              "description": "Get the current weather in a given city",
+              "parameters": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string",
+                    "description": "The name of the city"
+                  }
+                },
+                "required": [
+                  "city"
+                ],
+                "additionalProperties": false
+              }
+            }
+          ],
+          "tool_choice": "auto"
+        }
+      },
+      "response": {
+        "id": "resp_04fed7a0b95bcc0d0069f2ff0db1148190b9454078833ba09d",
+        "timestamp": "2026-04-30T07:04:45.000Z",
+        "modelId": "gpt-4o-mini-2024-07-18",
+        "headers": {
+          "alt-svc": "h3=\":443\"; ma=86400",
+          "cf-cache-status": "DYNAMIC",
+          "cf-ray": "9f44b1b54ccdaf0d-SJC",
+          "connection": "keep-alive",
+          "content-encoding": "br",
+          "content-type": "application/json",
+          "date": "Thu, 30 Apr 2026 07:04:47 GMT",
+          "openai-organization": "bbdc-ig9mlb",
+          "openai-processing-ms": "1641",
+          "openai-project": "proj_mDJfZBQyHnB8227bHVTprles",
+          "openai-version": "2020-10-01",
+          "server": "cloudflare",
+          "set-cookie": "__cf_bm=9NCJs0X7C9t9j.dGk.crLvx0pJs.Ji6Or4y8gv3kJDc-1777532685.644962-1.0.1.1-sAmsXTOSZ8S.gB67s.9bLfXQrT3G.e0l77m7Ahxq8iAbuOdequccUeBgt0ah7N7T.WpHSwqcNAsdp.tTrXpOH_ffWlYB.9hcMNSNGaGdi7ImINK2zC1.4elu7ZMNufUs; HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Thu, 30 Apr 2026 07:34:47 GMT",
+          "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+          "transfer-encoding": "chunked",
+          "x-content-type-options": "nosniff",
+          "x-ratelimit-limit-requests": "10000",
+          "x-ratelimit-limit-tokens": "10000000",
+          "x-ratelimit-remaining-requests": "9999",
+          "x-ratelimit-remaining-tokens": "9999718",
+          "x-ratelimit-reset-requests": "6ms",
+          "x-ratelimit-reset-tokens": "1ms",
+          "x-request-id": "req_b2bc85e7cab649219f3f30e3c9c2fa96"
+        },
+        "body": {
+          "id": "resp_04fed7a0b95bcc0d0069f2ff0db1148190b9454078833ba09d",
+          "object": "response",
+          "created_at": 1777532685,
+          "status": "completed",
+          "background": false,
+          "billing": {
+            "payer": "openai"
+          },
+          "completed_at": 1777532687,
+          "error": null,
+          "frequency_penalty": 0,
+          "incomplete_details": null,
+          "instructions": null,
+          "max_output_tokens": null,
+          "max_tool_calls": null,
+          "model": "gpt-4o-mini-2024-07-18",
+          "moderation": null,
+          "output": [
+            {
+              "id": "fc_04fed7a0b95bcc0d0069f2ff0f151c819096721479958b5aef",
+              "type": "function_call",
+              "status": "completed",
+              "arguments": "{\"city\":\"London\"}",
+              "call_id": "call_HgQsFl7kzZZTceQYeJrLBT9q",
+              "name": "get_weather"
+            }
+          ],
+          "parallel_tool_calls": true,
+          "presence_penalty": 0,
+          "previous_response_id": null,
+          "prompt_cache_key": null,
+          "prompt_cache_retention": "in_memory",
+          "reasoning": {
+            "effort": null,
+            "summary": null
+          },
+          "safety_identifier": null,
+          "service_tier": "default",
+          "store": true,
+          "temperature": 1,
+          "text": {
+            "format": {
+              "type": "text"
+            },
+            "verbosity": "medium"
+          },
+          "tool_choice": "auto",
+          "tools": [
+            {
+              "type": "function",
+              "description": "Get the current weather in a given city",
+              "name": "get_weather",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string",
+                    "description": "The name of the city"
+                  }
+                },
+                "required": [
+                  "city"
+                ],
+                "additionalProperties": false
+              },
+              "strict": true
+            }
+          ],
+          "top_logprobs": 0,
+          "top_p": 1,
+          "truncation": "disabled",
+          "usage": {
+            "input_tokens": 65,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 15,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 80
+          },
+          "user": null,
+          "metadata": {}
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "tool-call",
+                "toolCallId": "call_HgQsFl7kzZZTceQYeJrLBT9q",
+                "toolName": "get_weather",
+                "input": {
+                  "city": "London"
+                },
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "fc_04fed7a0b95bcc0d0069f2ff0f151c819096721479958b5aef"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "content": [
+              {
+                "type": "tool-result",
+                "toolCallId": "call_HgQsFl7kzZZTceQYeJrLBT9q",
+                "toolName": "get_weather",
+                "output": {
+                  "type": "json",
+                  "value": {
+                    "weather": "sunny",
+                    "temperature": 22,
+                    "city": "London"
+                  }
+                },
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "fc_04fed7a0b95bcc0d0069f2ff0f151c819096721479958b5aef"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "providerMetadata": {
+        "openai": {
+          "responseId": "resp_04fed7a0b95bcc0d0069f2ff0db1148190b9454078833ba09d",
+          "serviceTier": "default"
+        }
+      }
+    },
+    {
+      "stepNumber": 1,
+      "model": {
+        "provider": "openai.responses",
+        "modelId": "gpt-4o-mini"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "The weather in London is currently sunny with a temperature of 22°C.",
+          "providerMetadata": {
+            "openai": {
+              "itemId": "msg_04fed7a0b95bcc0d0069f2ff10e1608190a53c6331318fd84b"
+            }
+          }
+        }
+      ],
+      "finishReason": "stop",
+      "usage": {
+        "inputTokens": 102,
+        "inputTokenDetails": {
+          "noCacheTokens": 102,
+          "cacheReadTokens": 0
+        },
+        "outputTokens": 17,
+        "outputTokenDetails": {
+          "textTokens": 17,
+          "reasoningTokens": 0
+        },
+        "totalTokens": 119,
+        "raw": {
+          "input_tokens": 102,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 17,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "reasoningTokens": 0,
+        "cachedInputTokens": 0
+      },
+      "warnings": [],
+      "request": {
+        "body": {
+          "model": "gpt-4o-mini",
+          "input": [
+            {
+              "role": "system",
+              "content": "You are a helpful weather assistant."
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "What is the weather in London?"
+                }
+              ]
+            },
+            {
+              "type": "item_reference",
+              "id": "fc_04fed7a0b95bcc0d0069f2ff0f151c819096721479958b5aef"
+            },
+            {
+              "type": "function_call_output",
+              "call_id": "call_HgQsFl7kzZZTceQYeJrLBT9q",
+              "output": "{\"weather\":\"sunny\",\"temperature\":22,\"city\":\"London\"}"
+            }
+          ],
+          "tools": [
+            {
+              "type": "function",
+              "name": "get_weather",
+              "description": "Get the current weather in a given city",
+              "parameters": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string",
+                    "description": "The name of the city"
+                  }
+                },
+                "required": [
+                  "city"
+                ],
+                "additionalProperties": false
+              }
+            }
+          ],
+          "tool_choice": "auto"
+        }
+      },
+      "response": {
+        "id": "resp_04fed7a0b95bcc0d0069f2ff1011f88190992746e1a7ce53b2",
+        "timestamp": "2026-04-30T07:04:48.000Z",
+        "modelId": "gpt-4o-mini-2024-07-18",
+        "headers": {
+          "alt-svc": "h3=\":443\"; ma=86400",
+          "cf-cache-status": "DYNAMIC",
+          "cf-ray": "9f44b1c0d9a1af0d-SJC",
+          "connection": "keep-alive",
+          "content-encoding": "br",
+          "content-type": "application/json",
+          "date": "Thu, 30 Apr 2026 07:04:49 GMT",
+          "openai-organization": "bbdc-ig9mlb",
+          "openai-processing-ms": "1396",
+          "openai-project": "proj_mDJfZBQyHnB8227bHVTprles",
+          "openai-version": "2020-10-01",
+          "server": "cloudflare",
+          "set-cookie": "__cf_bm=b4Kss_yVuigU_guQ2qB3yYrz4sKe9qpVwgodMdiiUF4-1777532687.4914494-1.0.1.1-2YWhiBdwD55GNninp9LZDDDTvJEtjDu_a75EDhAadgAE_ePLc_ggulNoV79Qx9wSbYMxBNAhEP_Zff_csGdxXjeV.YDOAvWpg3ZHma5b4Kihi0Ox7lHnn6aOBccQ18qV; HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Thu, 30 Apr 2026 07:34:49 GMT",
+          "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+          "transfer-encoding": "chunked",
+          "x-content-type-options": "nosniff",
+          "x-ratelimit-limit-requests": "10000",
+          "x-ratelimit-limit-tokens": "10000000",
+          "x-ratelimit-remaining-requests": "9999",
+          "x-ratelimit-remaining-tokens": "9999681",
+          "x-ratelimit-reset-requests": "6ms",
+          "x-ratelimit-reset-tokens": "1ms",
+          "x-request-id": "req_79ef5efdfd5d4c78a307270a87c449cb"
+        },
+        "body": {
+          "id": "resp_04fed7a0b95bcc0d0069f2ff1011f88190992746e1a7ce53b2",
+          "object": "response",
+          "created_at": 1777532688,
+          "status": "completed",
+          "background": false,
+          "billing": {
+            "payer": "openai"
+          },
+          "completed_at": 1777532689,
+          "error": null,
+          "frequency_penalty": 0,
+          "incomplete_details": null,
+          "instructions": null,
+          "max_output_tokens": null,
+          "max_tool_calls": null,
+          "model": "gpt-4o-mini-2024-07-18",
+          "moderation": null,
+          "output": [
+            {
+              "id": "msg_04fed7a0b95bcc0d0069f2ff10e1608190a53c6331318fd84b",
+              "type": "message",
+              "status": "completed",
+              "content": [
+                {
+                  "type": "output_text",
+                  "annotations": [],
+                  "logprobs": [],
+                  "text": "The weather in London is currently sunny with a temperature of 22°C."
+                }
+              ],
+              "role": "assistant"
+            }
+          ],
+          "parallel_tool_calls": true,
+          "presence_penalty": 0,
+          "previous_response_id": null,
+          "prompt_cache_key": null,
+          "prompt_cache_retention": "in_memory",
+          "reasoning": {
+            "effort": null,
+            "summary": null
+          },
+          "safety_identifier": null,
+          "service_tier": "default",
+          "store": true,
+          "temperature": 1,
+          "text": {
+            "format": {
+              "type": "text"
+            },
+            "verbosity": "medium"
+          },
+          "tool_choice": "auto",
+          "tools": [
+            {
+              "type": "function",
+              "description": "Get the current weather in a given city",
+              "name": "get_weather",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string",
+                    "description": "The name of the city"
+                  }
+                },
+                "required": [
+                  "city"
+                ],
+                "additionalProperties": false
+              },
+              "strict": true
+            }
+          ],
+          "top_logprobs": 0,
+          "top_p": 1,
+          "truncation": "disabled",
+          "usage": {
+            "input_tokens": 102,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 17,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 119
+          },
+          "user": null,
+          "metadata": {}
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "tool-call",
+                "toolCallId": "call_HgQsFl7kzZZTceQYeJrLBT9q",
+                "toolName": "get_weather",
+                "input": {
+                  "city": "London"
+                },
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "fc_04fed7a0b95bcc0d0069f2ff0f151c819096721479958b5aef"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "content": [
+              {
+                "type": "tool-result",
+                "toolCallId": "call_HgQsFl7kzZZTceQYeJrLBT9q",
+                "toolName": "get_weather",
+                "output": {
+                  "type": "json",
+                  "value": {
+                    "weather": "sunny",
+                    "temperature": 22,
+                    "city": "London"
+                  }
+                },
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "fc_04fed7a0b95bcc0d0069f2ff0f151c819096721479958b5aef"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "The weather in London is currently sunny with a temperature of 22°C.",
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "msg_04fed7a0b95bcc0d0069f2ff10e1608190a53c6331318fd84b"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "providerMetadata": {
+        "openai": {
+          "responseId": "resp_04fed7a0b95bcc0d0069f2ff1011f88190992746e1a7ce53b2",
+          "serviceTier": "default"
+        }
+      }
+    }
+  ],
+  "_output": "The weather in London is currently sunny with a temperature of 22°C.",
+  "totalUsage": {
+    "inputTokens": 167,
+    "inputTokenDetails": {
+      "noCacheTokens": 167,
+      "cacheReadTokens": 0
+    },
+    "outputTokens": 32,
+    "outputTokenDetails": {
+      "textTokens": 32,
+      "reasoningTokens": 0
+    },
+    "totalTokens": 199,
+    "reasoningTokens": 0,
+    "cachedInputTokens": 0
+  },
+  "text": "The weather in London is currently sunny with a temperature of 22°C.",
+  "context": {},
+  "toolCalls": [
+    {
+      "type": "tool-call",
+      "toolCallId": "call_HgQsFl7kzZZTceQYeJrLBT9q",
+      "toolName": "get_weather",
+      "input": {
+        "city": "London"
+      },
+      "providerMetadata": {
+        "openai": {
+          "itemId": "fc_04fed7a0b95bcc0d0069f2ff0f151c819096721479958b5aef"
+        }
+      }
+    }
+  ],
+  "toolResults": [
+    {
+      "type": "tool-result",
+      "toolCallId": "call_HgQsFl7kzZZTceQYeJrLBT9q",
+      "toolName": "get_weather",
+      "input": {
+        "city": "London"
+      },
+      "output": {
+        "weather": "sunny",
+        "temperature": 22,
+        "city": "London"
+      },
+      "dynamic": false,
+      "providerMetadata": {
+        "openai": {
+          "itemId": "fc_04fed7a0b95bcc0d0069f2ff0f151c819096721479958b5aef"
+        }
+      }
+    }
+  ],
+  "feedback": null
+}

@@ -1,0 +1,86 @@
+downloading uv 0.9.7 aarch64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 4ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+tests/test_final_state.py FF                                             [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_npm_test_passes _____________________________
+
+    def test_npm_test_passes():
+        """Priority 1: Use npm test to verify the implementation."""
+        try:
+            result = subprocess.run(
+                ["npm", "test"],
+                cwd=PROJECT_DIR,
+                capture_output=True,
+                text=True,
+                timeout=NPM_TEST_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired as e:
+            pytest.fail(
+                f"npm test timed out after {NPM_TEST_TIMEOUT_SEC}s. "
+                f"stdout: {e.stdout!r}\nstderr: {e.stderr!r}"
+            )
+>       assert result.returncode == 0, f"'npm test' failed: {result.stderr}\n{result.stdout}"
+E       AssertionError: 'npm test' failed: ⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+E         
+E          FAIL  test/retriever.test.ts [ test/retriever.test.ts ]
+E         Error: Failed to load url ../src/retriever.js (resolved id: ../src/retriever.js) in /home/user/voltagent-project/test/retriever.test.ts. Does the file exist?
+E          ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17
+E         
+E         ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+E         
+E         
+E         
+E         > test
+E         > vitest run
+E         
+E         
+E          RUN  v1.6.1 /home/user/voltagent-project
+E         
+E          ❯ test/retriever.test.ts  (0 test)
+E         
+E          Test Files  1 failed (1)
+E               Tests  no tests
+E            Start at  07:12:44
+E            Duration  112ms (transform 27ms, setup 0ms, collect 0ms, tests 0ms, environment 0ms, prepare 33ms)
+E         
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['npm', 'test'], returncode=1, stdout='\n> test\n> vitest run\n\n\n RUN  v1.6.1 /home/user/volta... ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n').returncode
+
+tests/test_final_state.py:24: AssertionError
+__________________________ test_retriever_file_exists __________________________
+
+    def test_retriever_file_exists():
+        """Priority 3 fallback: basic file existence check."""
+        retriever_path = os.path.join(PROJECT_DIR, "src", "retriever.ts")
+>       assert os.path.isfile(retriever_path), f"File {retriever_path} does not exist."
+E       AssertionError: File /home/user/voltagent-project/src/retriever.ts does not exist.
+E       assert False
+E        +  where False = <function isfile at 0xe5f5aa860220>('/home/user/voltagent-project/src/retriever.ts')
+E        +    where <function isfile at 0xe5f5aa860220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:30: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_npm_test_passes - AssertionError: 'npm...
+FAILED tests/test_final_state.py::test_retriever_file_exists - AssertionError...
+============================== 2 failed in 0.39s ===============================

@@ -1,0 +1,46 @@
+{
+  "text": "The current weather in London, UK, is partly cloudy with a temperature of 15°C. The humidity is at 65%, and there is a wind speed of 10 km/h.",
+  "toolCalls": [
+    {
+      "type": "tool-call",
+      "toolCallId": "call_Y8pjhVv7MkwaOAocQVO1TV5f",
+      "toolName": "get_weather",
+      "input": {
+        "city": "London",
+        "country": "UK",
+        "unit": "celsius"
+      },
+      "providerMetadata": {
+        "openai": {
+          "itemId": "fc_08e8bc9a4f1870090069f2f375189c8190a8f54d632abc1dd1"
+        }
+      }
+    }
+  ],
+  "usage": {
+    "inputTokens": 174,
+    "inputTokenDetails": {
+      "noCacheTokens": 174,
+      "cacheReadTokens": 0
+    },
+    "outputTokens": 40,
+    "outputTokenDetails": {
+      "textTokens": 40,
+      "reasoningTokens": 0
+    },
+    "totalTokens": 214,
+    "raw": {
+      "input_tokens": 174,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 40,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "reasoningTokens": 0,
+    "cachedInputTokens": 0
+  },
+  "finishReason": "stop"
+}

@@ -1,0 +1,56 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1777508419.972196,
+            "stop": 1777508425.0053144
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_telemetry_packages_installed",
+                "status": "passed",
+                "duration": 0.00045985804172232747,
+                "start": 1777508419.9783514,
+                "stop": 1777508419.9790366,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_ts_contains_tracing_config",
+                "status": "passed",
+                "duration": 0.00033886096207425,
+                "start": 1777508419.9791262,
+                "stop": 1777508419.9796112,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_npm_start_executes_successfully",
+                "status": "passed",
+                "duration": 5.013873208023142,
+                "start": 1777508419.9796793,
+                "stop": 1777508424.9963112,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_output_log_exists",
+                "status": "passed",
+                "duration": 0.0043327760067768395,
+                "start": 1777508424.9969232,
+                "stop": 1777508425.0028112,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

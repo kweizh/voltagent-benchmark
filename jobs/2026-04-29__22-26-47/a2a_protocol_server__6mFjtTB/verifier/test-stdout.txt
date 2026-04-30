@@ -1,0 +1,165 @@
+downloading uv 0.9.7 aarch64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 12ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 4 items
+
+tests/test_final_state.py EEEE                                           [100%]
+
+==================================== ERRORS ====================================
+________________ ERROR at setup of test_process_endpoint_basic _________________
+
+    @pytest.fixture(scope="module")
+    def start_app():
+        # Install dependencies first, just in case they're not fully installed.
+        try:
+            subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s")
+    
+        # Start the app
+        process = subprocess.Popen(
+            ["npx", "tsx", "server.ts"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            preexec_fn=os.setsid,
+        )
+    
+        # Wait for the app to be ready
+        if not wait_for_port(PORT):
+            os.killpg(os.getpgid(process.pid), signal.SIGTERM)
+>           pytest.fail(f"App failed to start and listen on port {PORT}.")
+E           Failed: App failed to start and listen on port 3000.
+
+tests/test_final_state.py:59: Failed
+---------------------------- Captured stdout setup -----------------------------
+
+up to date, audited 416 packages in 750ms
+
+49 packages are looking for funding
+  run `npm fund` for details
+
+8 moderate severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+_ ERROR at setup of test_process_endpoint_receiver_extracts_structured_payload _
+
+    @pytest.fixture(scope="module")
+    def start_app():
+        # Install dependencies first, just in case they're not fully installed.
+        try:
+            subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s")
+    
+        # Start the app
+        process = subprocess.Popen(
+            ["npx", "tsx", "server.ts"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            preexec_fn=os.setsid,
+        )
+    
+        # Wait for the app to be ready
+        if not wait_for_port(PORT):
+            os.killpg(os.getpgid(process.pid), signal.SIGTERM)
+>           pytest.fail(f"App failed to start and listen on port {PORT}.")
+E           Failed: App failed to start and listen on port 3000.
+
+tests/test_final_state.py:59: Failed
+__________ ERROR at setup of test_process_endpoint_rejects_empty_text __________
+
+    @pytest.fixture(scope="module")
+    def start_app():
+        # Install dependencies first, just in case they're not fully installed.
+        try:
+            subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s")
+    
+        # Start the app
+        process = subprocess.Popen(
+            ["npx", "tsx", "server.ts"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            preexec_fn=os.setsid,
+        )
+    
+        # Wait for the app to be ready
+        if not wait_for_port(PORT):
+            os.killpg(os.getpgid(process.pid), signal.SIGTERM)
+>           pytest.fail(f"App failed to start and listen on port {PORT}.")
+E           Failed: App failed to start and listen on port 3000.
+
+tests/test_final_state.py:59: Failed
+___________ ERROR at setup of test_server_still_alive_after_requests ___________
+
+    @pytest.fixture(scope="module")
+    def start_app():
+        # Install dependencies first, just in case they're not fully installed.
+        try:
+            subprocess.run(
+                ["npm", "install"],
+                cwd=PROJECT_DIR,
+                timeout=NPM_INSTALL_TIMEOUT_SEC,
+            )
+        except subprocess.TimeoutExpired:
+            pytest.fail(f"npm install timed out after {NPM_INSTALL_TIMEOUT_SEC}s")
+    
+        # Start the app
+        process = subprocess.Popen(
+            ["npx", "tsx", "server.ts"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            preexec_fn=os.setsid,
+        )
+    
+        # Wait for the app to be ready
+        if not wait_for_port(PORT):
+            os.killpg(os.getpgid(process.pid), signal.SIGTERM)
+>           pytest.fail(f"App failed to start and listen on port {PORT}.")
+E           Failed: App failed to start and listen on port 3000.
+
+tests/test_final_state.py:59: Failed
+=========================== short test summary info ============================
+ERROR tests/test_final_state.py::test_process_endpoint_basic - Failed: App fa...
+ERROR tests/test_final_state.py::test_process_endpoint_receiver_extracts_structured_payload
+ERROR tests/test_final_state.py::test_process_endpoint_rejects_empty_text - F...
+ERROR tests/test_final_state.py::test_server_still_alive_after_requests - Fai...
+========================= 4 errors in 60.93s (0:01:00) =========================

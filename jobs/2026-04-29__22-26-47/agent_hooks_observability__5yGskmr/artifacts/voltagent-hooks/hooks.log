@@ -1,0 +1,4 @@
+HOOK: onStart
+HOOK: onToolStart - calculate_sum
+HOOK: onToolEnd - calculate_sum
+HOOK: onEnd

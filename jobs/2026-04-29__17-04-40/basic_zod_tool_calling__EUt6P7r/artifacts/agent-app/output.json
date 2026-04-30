@@ -1,0 +1,71 @@
+{
+  "prompt": "What is the weather in London?",
+  "response": "The current weather in London is partly cloudy, with a temperature of 15°C. The humidity level is at 72%, and there is a breeze with wind speeds of 12 km/h.",
+  "toolCalls": [
+    {
+      "type": "tool-call",
+      "toolCallId": "call_8hVW8CaMbFlpL1CCccH1SNJV",
+      "toolName": "get_weather",
+      "input": {
+        "city": "London",
+        "unit": "celsius"
+      },
+      "providerMetadata": {
+        "openai": {
+          "itemId": "fc_07b074a2e5c3c5ca0069f29e4bee7c819098272e7575223f54"
+        }
+      }
+    }
+  ],
+  "toolResults": [
+    {
+      "type": "tool-result",
+      "toolCallId": "call_8hVW8CaMbFlpL1CCccH1SNJV",
+      "toolName": "get_weather",
+      "input": {
+        "city": "London",
+        "unit": "celsius"
+      },
+      "output": {
+        "city": "London",
+        "temperature": 15,
+        "unit": "celsius",
+        "condition": "Partly cloudy",
+        "humidity": "72%",
+        "wind": "12 km/h"
+      },
+      "dynamic": false,
+      "providerMetadata": {
+        "openai": {
+          "itemId": "fc_07b074a2e5c3c5ca0069f29e4bee7c819098272e7575223f54"
+        }
+      }
+    }
+  ],
+  "usage": {
+    "inputTokens": 174,
+    "inputTokenDetails": {
+      "noCacheTokens": 174,
+      "cacheReadTokens": 0
+    },
+    "outputTokens": 41,
+    "outputTokenDetails": {
+      "textTokens": 41,
+      "reasoningTokens": 0
+    },
+    "totalTokens": 215,
+    "raw": {
+      "input_tokens": 174,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 41,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "reasoningTokens": 0,
+    "cachedInputTokens": 0
+  },
+  "finishReason": "stop"
+}
