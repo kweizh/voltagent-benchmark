@@ -1,0 +1,687 @@
+{
+  "steps": [
+    {
+      "stepNumber": 0,
+      "model": {
+        "provider": "openai.responses",
+        "modelId": "gpt-4o-mini"
+      },
+      "content": [
+        {
+          "type": "tool-call",
+          "toolCallId": "call_9IWyzXvhqV4xx19ShPiZQv42",
+          "toolName": "get_weather",
+          "input": {
+            "city": "London",
+            "country": "UK",
+            "units": "metric"
+          },
+          "providerMetadata": {
+            "openai": {
+              "itemId": "fc_0f2212e7d2df43530069f42a02cb308195b0938ed9da146175"
+            }
+          }
+        },
+        {
+          "type": "tool-result",
+          "toolCallId": "call_9IWyzXvhqV4xx19ShPiZQv42",
+          "toolName": "get_weather",
+          "input": {
+            "city": "London",
+            "country": "UK",
+            "units": "metric"
+          },
+          "output": {
+            "city": "London",
+            "country": "UK",
+            "temperature": 20,
+            "condition": "Partly cloudy",
+            "humidity": 65,
+            "windSpeed": 10,
+            "description": "Weather in London: 20°C, Partly cloudy, 65% humidity"
+          },
+          "dynamic": false,
+          "providerMetadata": {
+            "openai": {
+              "itemId": "fc_0f2212e7d2df43530069f42a02cb308195b0938ed9da146175"
+            }
+          }
+        }
+      ],
+      "finishReason": "tool-calls",
+      "usage": {
+        "inputTokens": 94,
+        "inputTokenDetails": {
+          "noCacheTokens": 94,
+          "cacheReadTokens": 0
+        },
+        "outputTokens": 23,
+        "outputTokenDetails": {
+          "textTokens": 23,
+          "reasoningTokens": 0
+        },
+        "totalTokens": 117,
+        "raw": {
+          "input_tokens": 94,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 23,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "reasoningTokens": 0,
+        "cachedInputTokens": 0
+      },
+      "warnings": [],
+      "request": {
+        "body": {
+          "model": "gpt-4o-mini",
+          "input": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "What is the weather in London?"
+                }
+              ]
+            }
+          ],
+          "tools": [
+            {
+              "type": "function",
+              "name": "get_weather",
+              "description": "Get the current weather information for a specific city",
+              "parameters": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string",
+                    "description": "The name of the city"
+                  },
+                  "country": {
+                    "description": "The country code (e.g., US, UK)",
+                    "type": "string"
+                  },
+                  "units": {
+                    "description": "Temperature units: metric (Celsius) or imperial (Fahrenheit)",
+                    "type": "string",
+                    "enum": [
+                      "metric",
+                      "imperial"
+                    ]
+                  }
+                },
+                "required": [
+                  "city"
+                ],
+                "additionalProperties": false
+              }
+            }
+          ],
+          "tool_choice": "auto"
+        }
+      },
+      "response": {
+        "id": "resp_0f2212e7d2df43530069f42a019d84819589a9abebebcda6de",
+        "timestamp": "2026-05-01T04:20:17.000Z",
+        "modelId": "gpt-4o-mini-2024-07-18",
+        "headers": {
+          "alt-svc": "h3=\":443\"; ma=86400",
+          "cf-cache-status": "DYNAMIC",
+          "cf-ray": "9f4bfe29a8f535d6-SJC",
+          "connection": "keep-alive",
+          "content-encoding": "br",
+          "content-type": "application/json",
+          "date": "Fri, 01 May 2026 04:20:19 GMT",
+          "openai-organization": "bbdc-ig9mlb",
+          "openai-processing-ms": "1534",
+          "openai-project": "proj_mDJfZBQyHnB8227bHVTprles",
+          "openai-version": "2020-10-01",
+          "server": "cloudflare",
+          "set-cookie": "__cf_bm=RrYm1FrZGUpFvVTylYfG0dB8pbSS.hejKrvXfAixDtc-1777609217.5440667-1.0.1.1-8VlAcnZopBBml7gG_EtXKvvJD_YHIgwZC3H6L_p3f_GFtrBxOsEE4JvvOUVJb08zFxrySKcIBkZ8Q3fm.zllO3LtVIj74VVLPGXAJFxAbHpK3.nvYxHl0NSWvJyGvlb4; HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Fri, 01 May 2026 04:50:19 GMT",
+          "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+          "transfer-encoding": "chunked",
+          "x-content-type-options": "nosniff",
+          "x-ratelimit-limit-requests": "10000",
+          "x-ratelimit-limit-tokens": "10000000",
+          "x-ratelimit-remaining-requests": "9999",
+          "x-ratelimit-remaining-tokens": "9999689",
+          "x-ratelimit-reset-requests": "6ms",
+          "x-ratelimit-reset-tokens": "1ms",
+          "x-request-id": "req_8efb6448ebd54a9c868af0ad3a69935d"
+        },
+        "body": {
+          "id": "resp_0f2212e7d2df43530069f42a019d84819589a9abebebcda6de",
+          "object": "response",
+          "created_at": 1777609217,
+          "status": "completed",
+          "background": false,
+          "billing": {
+            "payer": "openai"
+          },
+          "completed_at": 1777609218,
+          "error": null,
+          "frequency_penalty": 0,
+          "incomplete_details": null,
+          "instructions": null,
+          "max_output_tokens": null,
+          "max_tool_calls": null,
+          "model": "gpt-4o-mini-2024-07-18",
+          "moderation": null,
+          "output": [
+            {
+              "id": "fc_0f2212e7d2df43530069f42a02cb308195b0938ed9da146175",
+              "type": "function_call",
+              "status": "completed",
+              "arguments": "{\"city\":\"London\",\"country\":\"UK\",\"units\":\"metric\"}",
+              "call_id": "call_9IWyzXvhqV4xx19ShPiZQv42",
+              "name": "get_weather"
+            }
+          ],
+          "parallel_tool_calls": true,
+          "presence_penalty": 0,
+          "previous_response_id": null,
+          "prompt_cache_key": null,
+          "prompt_cache_retention": "in_memory",
+          "reasoning": {
+            "effort": null,
+            "summary": null
+          },
+          "safety_identifier": null,
+          "service_tier": "default",
+          "store": true,
+          "temperature": 1,
+          "text": {
+            "format": {
+              "type": "text"
+            },
+            "verbosity": "medium"
+          },
+          "tool_choice": "auto",
+          "tools": [
+            {
+              "type": "function",
+              "description": "Get the current weather information for a specific city",
+              "name": "get_weather",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string",
+                    "description": "The name of the city"
+                  },
+                  "country": {
+                    "description": "The country code (e.g., US, UK)",
+                    "type": "string"
+                  },
+                  "units": {
+                    "description": "Temperature units: metric (Celsius) or imperial (Fahrenheit)",
+                    "type": "string",
+                    "enum": [
+                      "metric",
+                      "imperial"
+                    ]
+                  }
+                },
+                "required": [
+                  "city",
+                  "country",
+                  "units"
+                ],
+                "additionalProperties": false
+              },
+              "strict": true
+            }
+          ],
+          "top_logprobs": 0,
+          "top_p": 1,
+          "truncation": "disabled",
+          "usage": {
+            "input_tokens": 94,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 23,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 117
+          },
+          "user": null,
+          "metadata": {}
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "tool-call",
+                "toolCallId": "call_9IWyzXvhqV4xx19ShPiZQv42",
+                "toolName": "get_weather",
+                "input": {
+                  "city": "London",
+                  "country": "UK",
+                  "units": "metric"
+                },
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "fc_0f2212e7d2df43530069f42a02cb308195b0938ed9da146175"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "content": [
+              {
+                "type": "tool-result",
+                "toolCallId": "call_9IWyzXvhqV4xx19ShPiZQv42",
+                "toolName": "get_weather",
+                "output": {
+                  "type": "json",
+                  "value": {
+                    "city": "London",
+                    "country": "UK",
+                    "temperature": 20,
+                    "condition": "Partly cloudy",
+                    "humidity": 65,
+                    "windSpeed": 10,
+                    "description": "Weather in London: 20°C, Partly cloudy, 65% humidity"
+                  }
+                },
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "fc_0f2212e7d2df43530069f42a02cb308195b0938ed9da146175"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "providerMetadata": {
+        "openai": {
+          "responseId": "resp_0f2212e7d2df43530069f42a019d84819589a9abebebcda6de",
+          "serviceTier": "default"
+        }
+      }
+    },
+    {
+      "stepNumber": 1,
+      "model": {
+        "provider": "openai.responses",
+        "modelId": "gpt-4o-mini"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "The current weather in London is:\n\n- **Temperature:** 20°C\n- **Condition:** Partly cloudy\n- **Humidity:** 65%\n- **Wind Speed:** 10 km/h",
+          "providerMetadata": {
+            "openai": {
+              "itemId": "msg_0f2212e7d2df43530069f42a040cfc81958eb744d043c95d19"
+            }
+          }
+        }
+      ],
+      "finishReason": "stop",
+      "usage": {
+        "inputTokens": 172,
+        "inputTokenDetails": {
+          "noCacheTokens": 172,
+          "cacheReadTokens": 0
+        },
+        "outputTokens": 41,
+        "outputTokenDetails": {
+          "textTokens": 41,
+          "reasoningTokens": 0
+        },
+        "totalTokens": 213,
+        "raw": {
+          "input_tokens": 172,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 41,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "reasoningTokens": 0,
+        "cachedInputTokens": 0
+      },
+      "warnings": [],
+      "request": {
+        "body": {
+          "model": "gpt-4o-mini",
+          "input": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "input_text",
+                  "text": "What is the weather in London?"
+                }
+              ]
+            },
+            {
+              "type": "item_reference",
+              "id": "fc_0f2212e7d2df43530069f42a02cb308195b0938ed9da146175"
+            },
+            {
+              "type": "function_call_output",
+              "call_id": "call_9IWyzXvhqV4xx19ShPiZQv42",
+              "output": "{\"city\":\"London\",\"country\":\"UK\",\"temperature\":20,\"condition\":\"Partly cloudy\",\"humidity\":65,\"windSpeed\":10,\"description\":\"Weather in London: 20°C, Partly cloudy, 65% humidity\"}"
+            }
+          ],
+          "tools": [
+            {
+              "type": "function",
+              "name": "get_weather",
+              "description": "Get the current weather information for a specific city",
+              "parameters": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string",
+                    "description": "The name of the city"
+                  },
+                  "country": {
+                    "description": "The country code (e.g., US, UK)",
+                    "type": "string"
+                  },
+                  "units": {
+                    "description": "Temperature units: metric (Celsius) or imperial (Fahrenheit)",
+                    "type": "string",
+                    "enum": [
+                      "metric",
+                      "imperial"
+                    ]
+                  }
+                },
+                "required": [
+                  "city"
+                ],
+                "additionalProperties": false
+              }
+            }
+          ],
+          "tool_choice": "auto"
+        }
+      },
+      "response": {
+        "id": "resp_0f2212e7d2df43530069f42a03518081959bda6d5acd271eac",
+        "timestamp": "2026-05-01T04:20:19.000Z",
+        "modelId": "gpt-4o-mini-2024-07-18",
+        "headers": {
+          "alt-svc": "h3=\":443\"; ma=86400",
+          "cf-cache-status": "DYNAMIC",
+          "cf-ray": "9f4bfe344d3235d6-SJC",
+          "connection": "keep-alive",
+          "content-encoding": "br",
+          "content-type": "application/json",
+          "date": "Fri, 01 May 2026 04:20:20 GMT",
+          "openai-organization": "bbdc-ig9mlb",
+          "openai-processing-ms": "1450",
+          "openai-project": "proj_mDJfZBQyHnB8227bHVTprles",
+          "openai-version": "2020-10-01",
+          "server": "cloudflare",
+          "set-cookie": "__cf_bm=GdJyk6qAtwp5S8ILQUKp1iNCQQ434YR8F0xzerv2T9o-1777609219.248496-1.0.1.1-WDW9gseFA.cXV7FTKeezm1WeODVk1.fVud1ZPpuvGpJm4qQFzuM78MmmATCH04Q1vBHRHcjQi7tfbSkkqpR4EWwD7g.c9Rx3uY08SDnjMdWQgVTTqW.I227i6b8mQLif; HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Fri, 01 May 2026 04:50:20 GMT",
+          "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+          "transfer-encoding": "chunked",
+          "x-content-type-options": "nosniff",
+          "x-ratelimit-limit-requests": "10000",
+          "x-ratelimit-limit-tokens": "10000000",
+          "x-ratelimit-remaining-requests": "9999",
+          "x-ratelimit-remaining-tokens": "9999611",
+          "x-ratelimit-reset-requests": "6ms",
+          "x-ratelimit-reset-tokens": "2ms",
+          "x-request-id": "req_282fa0fae98c99f68001cfc164dc455a"
+        },
+        "body": {
+          "id": "resp_0f2212e7d2df43530069f42a03518081959bda6d5acd271eac",
+          "object": "response",
+          "created_at": 1777609219,
+          "status": "completed",
+          "background": false,
+          "billing": {
+            "payer": "openai"
+          },
+          "completed_at": 1777609220,
+          "error": null,
+          "frequency_penalty": 0,
+          "incomplete_details": null,
+          "instructions": null,
+          "max_output_tokens": null,
+          "max_tool_calls": null,
+          "model": "gpt-4o-mini-2024-07-18",
+          "moderation": null,
+          "output": [
+            {
+              "id": "msg_0f2212e7d2df43530069f42a040cfc81958eb744d043c95d19",
+              "type": "message",
+              "status": "completed",
+              "content": [
+                {
+                  "type": "output_text",
+                  "annotations": [],
+                  "logprobs": [],
+                  "text": "The current weather in London is:\n\n- **Temperature:** 20°C\n- **Condition:** Partly cloudy\n- **Humidity:** 65%\n- **Wind Speed:** 10 km/h"
+                }
+              ],
+              "role": "assistant"
+            }
+          ],
+          "parallel_tool_calls": true,
+          "presence_penalty": 0,
+          "previous_response_id": null,
+          "prompt_cache_key": null,
+          "prompt_cache_retention": "in_memory",
+          "reasoning": {
+            "effort": null,
+            "summary": null
+          },
+          "safety_identifier": null,
+          "service_tier": "default",
+          "store": true,
+          "temperature": 1,
+          "text": {
+            "format": {
+              "type": "text"
+            },
+            "verbosity": "medium"
+          },
+          "tool_choice": "auto",
+          "tools": [
+            {
+              "type": "function",
+              "description": "Get the current weather information for a specific city",
+              "name": "get_weather",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string",
+                    "description": "The name of the city"
+                  },
+                  "country": {
+                    "description": "The country code (e.g., US, UK)",
+                    "type": "string"
+                  },
+                  "units": {
+                    "description": "Temperature units: metric (Celsius) or imperial (Fahrenheit)",
+                    "type": "string",
+                    "enum": [
+                      "metric",
+                      "imperial"
+                    ]
+                  }
+                },
+                "required": [
+                  "city",
+                  "country",
+                  "units"
+                ],
+                "additionalProperties": false
+              },
+              "strict": true
+            }
+          ],
+          "top_logprobs": 0,
+          "top_p": 1,
+          "truncation": "disabled",
+          "usage": {
+            "input_tokens": 172,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 41,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 213
+          },
+          "user": null,
+          "metadata": {}
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "tool-call",
+                "toolCallId": "call_9IWyzXvhqV4xx19ShPiZQv42",
+                "toolName": "get_weather",
+                "input": {
+                  "city": "London",
+                  "country": "UK",
+                  "units": "metric"
+                },
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "fc_0f2212e7d2df43530069f42a02cb308195b0938ed9da146175"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "content": [
+              {
+                "type": "tool-result",
+                "toolCallId": "call_9IWyzXvhqV4xx19ShPiZQv42",
+                "toolName": "get_weather",
+                "output": {
+                  "type": "json",
+                  "value": {
+                    "city": "London",
+                    "country": "UK",
+                    "temperature": 20,
+                    "condition": "Partly cloudy",
+                    "humidity": 65,
+                    "windSpeed": 10,
+                    "description": "Weather in London: 20°C, Partly cloudy, 65% humidity"
+                  }
+                },
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "fc_0f2212e7d2df43530069f42a02cb308195b0938ed9da146175"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "The current weather in London is:\n\n- **Temperature:** 20°C\n- **Condition:** Partly cloudy\n- **Humidity:** 65%\n- **Wind Speed:** 10 km/h",
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "msg_0f2212e7d2df43530069f42a040cfc81958eb744d043c95d19"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "providerMetadata": {
+        "openai": {
+          "responseId": "resp_0f2212e7d2df43530069f42a03518081959bda6d5acd271eac",
+          "serviceTier": "default"
+        }
+      }
+    }
+  ],
+  "_output": "The current weather in London is:\n\n- **Temperature:** 20°C\n- **Condition:** Partly cloudy\n- **Humidity:** 65%\n- **Wind Speed:** 10 km/h",
+  "totalUsage": {
+    "inputTokens": 266,
+    "inputTokenDetails": {
+      "noCacheTokens": 266,
+      "cacheReadTokens": 0
+    },
+    "outputTokens": 64,
+    "outputTokenDetails": {
+      "textTokens": 64,
+      "reasoningTokens": 0
+    },
+    "totalTokens": 330,
+    "reasoningTokens": 0,
+    "cachedInputTokens": 0
+  },
+  "text": "The current weather in London is:\n\n- **Temperature:** 20°C\n- **Condition:** Partly cloudy\n- **Humidity:** 65%\n- **Wind Speed:** 10 km/h",
+  "context": {},
+  "toolCalls": [
+    {
+      "type": "tool-call",
+      "toolCallId": "call_9IWyzXvhqV4xx19ShPiZQv42",
+      "toolName": "get_weather",
+      "input": {
+        "city": "London",
+        "country": "UK",
+        "units": "metric"
+      },
+      "providerMetadata": {
+        "openai": {
+          "itemId": "fc_0f2212e7d2df43530069f42a02cb308195b0938ed9da146175"
+        }
+      }
+    }
+  ],
+  "toolResults": [
+    {
+      "type": "tool-result",
+      "toolCallId": "call_9IWyzXvhqV4xx19ShPiZQv42",
+      "toolName": "get_weather",
+      "input": {
+        "city": "London",
+        "country": "UK",
+        "units": "metric"
+      },
+      "output": {
+        "city": "London",
+        "country": "UK",
+        "temperature": 20,
+        "condition": "Partly cloudy",
+        "humidity": 65,
+        "windSpeed": 10,
+        "description": "Weather in London: 20°C, Partly cloudy, 65% humidity"
+      },
+      "dynamic": false,
+      "providerMetadata": {
+        "openai": {
+          "itemId": "fc_0f2212e7d2df43530069f42a02cb308195b0938ed9da146175"
+        }
+      }
+    }
+  ],
+  "feedback": null
+}

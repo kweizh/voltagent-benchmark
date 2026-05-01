@@ -1,0 +1,42 @@
+{
+    "id": "0983bba6-c581-4e79-9f30-51bc8ce2d823",
+    "started_at": "2026-04-30T21:14:45.514351",
+    "finished_at": "2026-04-30T21:31:08.245786",
+    "n_total_trials": 12,
+    "stats": {
+        "n_trials": 12,
+        "n_errors": 0,
+        "evals": {
+            "pochi__glm-4.7__voltagent-tasks": {
+                "n_trials": 12,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.5833333333333334
+                    }
+                ],
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "hono_server_rest_api__xPQB66r",
+                            "vercel_ai_exporter_tracing__zn8mMzx",
+                            "a2a_protocol_server__dAQhXbP",
+                            "mcp_client_integration__MuzYUxt",
+                            "memory_libsql_turso__bhKB7ye"
+                        ],
+                        "1.0": [
+                            "agent_hooks_observability__n8LgU9q",
+                            "voice_agent_pii_redaction__CMJuFEb",
+                            "basic_zod_tool_calling__a6F4ETG",
+                            "workflow_conditional_andwhen__fHm5v3h",
+                            "supervisor_writer_editor__Ez8ZMHB",
+                            "parallel_workflow_andall__jPR38aU",
+                            "custom_rest_api_rag__wXPWmQ6"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        }
+    }
+}

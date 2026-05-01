@@ -1,0 +1,23 @@
+{
+  "name": "voltagent-tracing-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^0.0.40",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.216.0",
+    "@opentelemetry/instrumentation": "^0.216.0",
+    "@opentelemetry/sdk-trace-node": "^2.7.1",
+    "@vercel/otel": "^2.1.2",
+    "@voltagent/core": "latest",
+    "ai": "^6.0.172"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}

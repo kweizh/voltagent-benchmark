@@ -1,0 +1,62 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 2,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1777609815.1062925,
+            "stop": 1777609816.6454666
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_telemetry_packages_installed",
+                "status": "passed",
+                "duration": 0.0003501210594549775,
+                "start": 1777609815.112166,
+                "stop": 1777609815.1126742,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_index_ts_contains_tracing_config",
+                "status": "passed",
+                "duration": 0.00024220603518188,
+                "start": 1777609815.1127594,
+                "stop": 1777609815.113101,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_npm_start_executes_successfully",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 1.5054549849010073,
+                "start": 1777609815.1131666,
+                "stop": 1777609816.6421335,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_npm_start_executes_successfully():\n        \"\"\"Priority 1: Run the script and verify it produces output.log.\n    \n        The agent's script typically initializes an OTel tracer/SDK that holds\n        Node's event loop open beyond the work we actually care about. Run in\n        the background and poll for the side-effect (output.log being written\n        or refreshed); tear the process down once it lands.\n        \"\"\"\n        prior_mtime = os.path.getmtime(LOG_FILE) if os.path.isfile(LOG_FILE) else 0.0\n    \n        proc = subprocess.Popen(\n            [\"npm\", \"start\"],\n            cwd=PROJECT_DIR,\n            stdout=subprocess.PIPE,\n            stderr=subprocess.PIPE,\n            text=True,\n            preexec_fn=os.setsid,\n        )\n    \n        deadline = time.monotonic() + NPM_START_TIMEOUT_SEC\n        side_effect_seen = False\n        early_exit_code = None\n        try:\n            while time.monotonic() < deadline:\n                if os.path.isfile(LOG_FILE):\n                    mtime = os.path.getmtime(LOG_FILE)\n                    size = os.path.getsize(LOG_FILE)\n                    if mtime > prior_mtime and size > 0:\n                        side_effect_seen = True\n                        time.sleep(1.0)\n                        break\n                rc = proc.poll()\n                if rc is not None:\n                    early_exit_code = rc\n                    break\n                time.sleep(0.5)\n        finally:\n            if proc.poll() is None:\n                try:\n                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)\n                    proc.wait(timeout=5)\n                except Exception:\n                    try:\n                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)\n                    except Exception:\n                        pass\n            try:\n                stdout, stderr = proc.communicate(timeout=5)\n            except subprocess.TimeoutExpired:\n                stdout, stderr = \"\", \"\"\n    \n        if not side_effect_seen:\n            if early_exit_code is not None and early_exit_code != 0:\n>               pytest.fail(\n                    f\"'npm start' exited with code {early_exit_code} before \"\n                    f\"producing {LOG_FILE}.\\nstdout: {stdout!r}\\nstderr: {stderr!r}\"\n                )\nE               Failed: 'npm start' exited with code 1 before producing /home/user/app/output.log.\nE               stdout: '\\n> voltagent-tracing-app@1.0.0 start\\n> ts-node index.ts\\n\\n'\nE               stderr: \"/home/user/app/node_modules/ts-node/src/index.ts:859\\n    return new TSError(diagnosticText, diagnosticCodes, diagnostics);\\n           ^\\nTSError: \u2a2f Unable to compile TypeScript:\\nindex.ts(34,7): error TS2322: Type 'OpenAIChatLanguageModel' is not assignable to type 'LanguageModel'.\\n  Type 'OpenAIChatLanguageModel' is not assignable to type '(string & {}) | LanguageModelV3 | LanguageModelV2'.\\n    Property 'supportedUrls' is missing in type 'OpenAIChatLanguageModel' but required in type 'LanguageModelV2'.\\n\\n    at createTSError (/home/user/app/node_modules/ts-node/src/index.ts:859:12)\\n    at reportTSError (/home/user/app/node_modules/ts-node/src/index.ts:863:19)\\n    at getOutput (/home/user/app/node_modules/ts-node/src/index.ts:1077:36)\\n    at Object.compile (/home/user/app/node_modules/ts-node/src/index.ts:1433:41)\\n    at Module.m._compile (/home/user/app/node_modules/ts-node/src/index.ts:1617:30)\\n    at node:internal/modules/cjs/loader:1943:10\\n    at Object.require.extensions.<computed> [as .ts] (/home/user/app/node_modules/ts-node/src/index.ts:1621:12)\\n    at Module.load (node:internal/modules/cjs/loader:1533:32)\\n    at Module._load (node:internal/modules/cjs/loader:1335:12)\\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19) {\\n  diagnosticCodes: [ 2322 ]\\n}\\n\"\n\ntests/test_final_state.py:91: Failed",
+                "message": "The test failed in the call phase due to an exception"
+            },
+            {
+                "name": "test_final_state.py::test_output_log_exists",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0009251589654013515,
+                "start": 1777609816.6429427,
+                "stop": 1777609816.6452365,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_output_log_exists():\n        \"\"\"Priority 3: Check if the log file was created.\"\"\"\n>       assert os.path.isfile(LOG_FILE), f\"Log file not found at {LOG_FILE}\"\nE       AssertionError: Log file not found at /home/user/app/output.log\nE       assert False\nE        +  where False = <function isfile at 0xf35e72bd0220>('/home/user/app/output.log')\nE        +    where <function isfile at 0xf35e72bd0220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:103: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

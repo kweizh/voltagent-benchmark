@@ -1,0 +1,549 @@
+downloading uv 0.9.7 aarch64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 14ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 4 items
+
+tests/test_final_state.py FFFF                                           [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_process_endpoint_basic __________________________
+
+start_app = None
+
+    def test_process_endpoint_basic(start_app):
+        """Baseline: the endpoint responds 200 and the body mentions the payload."""
+        payload = {"text": "Please process this incoming A2A message: { 'source': 'node-1', 'data': 'cpu usage at 99%' }"}
+        try:
+>           status, body = _post_json("/api/process", payload, timeout=PROCESS_REQUEST_TIMEOUT_SEC)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_final_state.py:75: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_final_state.py:31: in _post_json
+    with urllib.request.urlopen(req, timeout=timeout) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:215: in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:515: in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:532: in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+usr/lib/python3.12/urllib/request.py:492: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:1373: in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:1348: in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+usr/lib/python3.12/http/client.py:1448: in getresponse
+    response.begin()
+usr/lib/python3.12/http/client.py:336: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <http.client.HTTPResponse object at 0xfd42282601f0>
+
+    def _read_status(self):
+        line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+        if len(line) > _MAXLINE:
+            raise LineTooLong("status line")
+        if self.debuglevel > 0:
+            print("reply:", repr(line))
+        if not line:
+            # Presumably, the server closed the connection before
+            # sending a valid response.
+>           raise RemoteDisconnected("Remote end closed connection without"
+                                     " response")
+E           http.client.RemoteDisconnected: Remote end closed connection without response
+
+usr/lib/python3.12/http/client.py:305: RemoteDisconnected
+---------------------------- Captured stdout setup -----------------------------
+
+up to date, audited 413 packages in 2s
+
+49 packages are looking for funding
+  run `npm fund` for details
+
+8 moderate severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+__________ test_process_endpoint_receiver_extracts_structured_payload __________
+
+self = <urllib.request.HTTPHandler object at 0xfd4227ded3a0>
+http_class = <class 'http.client.HTTPConnection'>
+req = <urllib.request.Request object at 0xfd4227ad3e90>, http_conn_args = {}
+host = 'localhost:3000'
+h = <http.client.HTTPConnection object at 0xfd4227ad5370>
+headers = {'Connection': 'close', 'Content-Length': '137', 'Content-Type': 'application/json', 'Host': 'localhost:3000', ...}
+
+    def do_open(self, http_class, req, **http_conn_args):
+        """Return an HTTPResponse object for the request, using http_class.
+    
+        http_class must implement the HTTPConnection API from http.client.
+        """
+        host = req.host
+        if not host:
+            raise URLError('no host given')
+    
+        # will parse host:port
+        h = http_class(host, timeout=req.timeout, **http_conn_args)
+        h.set_debuglevel(self._debuglevel)
+    
+        headers = dict(req.unredirected_hdrs)
+        headers.update({k: v for k, v in req.headers.items()
+                        if k not in headers})
+    
+        # TODO(jhylton): Should this be redesigned to handle
+        # persistent connections?
+    
+        # We want to make an HTTP/1.1 request, but the addinfourl
+        # class isn't prepared to deal with a persistent connection.
+        # It will try to read all remaining data from the socket,
+        # which will block while the server waits for the next request.
+        # So make sure the connection gets closed after the (only)
+        # request.
+        headers["Connection"] = "close"
+        headers = {name.title(): val for name, val in headers.items()}
+    
+        if req._tunnel_host:
+            tunnel_headers = {}
+            proxy_auth_hdr = "Proxy-Authorization"
+            if proxy_auth_hdr in headers:
+                tunnel_headers[proxy_auth_hdr] = headers[proxy_auth_hdr]
+                # Proxy-Authorization should not be sent to origin
+                # server.
+                del headers[proxy_auth_hdr]
+            h.set_tunnel(req._tunnel_host, headers=tunnel_headers)
+    
+        try:
+            try:
+>               h.request(req.get_method(), req.selector, req.data, headers,
+                          encode_chunked=req.has_header('Transfer-encoding'))
+
+usr/lib/python3.12/urllib/request.py:1344: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/lib/python3.12/http/client.py:1356: in request
+    self._send_request(method, url, body, headers, encode_chunked)
+usr/lib/python3.12/http/client.py:1402: in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+usr/lib/python3.12/http/client.py:1351: in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+usr/lib/python3.12/http/client.py:1111: in _send_output
+    self.send(msg)
+usr/lib/python3.12/http/client.py:1055: in send
+    self.connect()
+usr/lib/python3.12/http/client.py:1021: in connect
+    self.sock = self._create_connection(
+usr/lib/python3.12/socket.py:852: in create_connection
+    raise exceptions[0]
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+address = ('localhost', 3000), timeout = 45, source_address = None
+
+    def create_connection(address, timeout=_GLOBAL_DEFAULT_TIMEOUT,
+                          source_address=None, *, all_errors=False):
+        """Connect to *address* and return the socket object.
+    
+        Convenience function.  Connect to *address* (a 2-tuple ``(host,
+        port)``) and return the socket object.  Passing the optional
+        *timeout* parameter will set the timeout on the socket instance
+        before attempting to connect.  If no *timeout* is supplied, the
+        global default timeout setting returned by :func:`getdefaulttimeout`
+        is used.  If *source_address* is set it must be a tuple of (host, port)
+        for the socket to bind as a source address before making the connection.
+        A host of '' or port 0 tells the OS to use the default. When a connection
+        cannot be created, raises the last error if *all_errors* is False,
+        and an ExceptionGroup of all errors if *all_errors* is True.
+        """
+    
+        host, port = address
+        exceptions = []
+        for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+            af, socktype, proto, canonname, sa = res
+            sock = None
+            try:
+                sock = socket(af, socktype, proto)
+                if timeout is not _GLOBAL_DEFAULT_TIMEOUT:
+                    sock.settimeout(timeout)
+                if source_address:
+                    sock.bind(source_address)
+>               sock.connect(sa)
+E               ConnectionRefusedError: [Errno 111] Connection refused
+
+usr/lib/python3.12/socket.py:837: ConnectionRefusedError
+
+During handling of the above exception, another exception occurred:
+
+start_app = None
+
+    def test_process_endpoint_receiver_extracts_structured_payload(start_app):
+        """The receiver agent is supposed to extract structured JSON from the
+        incoming text. Check that distinctive fields flow through to the
+        processor's summary."""
+        payload = {
+            "text": (
+                "Incoming A2A message envelope: "
+                "{ 'source': 'sensor-7', 'severity': 'critical', "
+                "'data': 'temperature exceeded 95C in rack-B' }"
+            )
+        }
+        try:
+>           status, body = _post_json("/api/process", payload, timeout=PROCESS_REQUEST_TIMEOUT_SEC)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_final_state.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_final_state.py:31: in _post_json
+    with urllib.request.urlopen(req, timeout=timeout) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:215: in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:515: in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:532: in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+usr/lib/python3.12/urllib/request.py:492: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:1373: in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <urllib.request.HTTPHandler object at 0xfd4227ded3a0>
+http_class = <class 'http.client.HTTPConnection'>
+req = <urllib.request.Request object at 0xfd4227ad3e90>, http_conn_args = {}
+host = 'localhost:3000'
+h = <http.client.HTTPConnection object at 0xfd4227ad5370>
+headers = {'Connection': 'close', 'Content-Length': '137', 'Content-Type': 'application/json', 'Host': 'localhost:3000', ...}
+
+    def do_open(self, http_class, req, **http_conn_args):
+        """Return an HTTPResponse object for the request, using http_class.
+    
+        http_class must implement the HTTPConnection API from http.client.
+        """
+        host = req.host
+        if not host:
+            raise URLError('no host given')
+    
+        # will parse host:port
+        h = http_class(host, timeout=req.timeout, **http_conn_args)
+        h.set_debuglevel(self._debuglevel)
+    
+        headers = dict(req.unredirected_hdrs)
+        headers.update({k: v for k, v in req.headers.items()
+                        if k not in headers})
+    
+        # TODO(jhylton): Should this be redesigned to handle
+        # persistent connections?
+    
+        # We want to make an HTTP/1.1 request, but the addinfourl
+        # class isn't prepared to deal with a persistent connection.
+        # It will try to read all remaining data from the socket,
+        # which will block while the server waits for the next request.
+        # So make sure the connection gets closed after the (only)
+        # request.
+        headers["Connection"] = "close"
+        headers = {name.title(): val for name, val in headers.items()}
+    
+        if req._tunnel_host:
+            tunnel_headers = {}
+            proxy_auth_hdr = "Proxy-Authorization"
+            if proxy_auth_hdr in headers:
+                tunnel_headers[proxy_auth_hdr] = headers[proxy_auth_hdr]
+                # Proxy-Authorization should not be sent to origin
+                # server.
+                del headers[proxy_auth_hdr]
+            h.set_tunnel(req._tunnel_host, headers=tunnel_headers)
+    
+        try:
+            try:
+                h.request(req.get_method(), req.selector, req.data, headers,
+                          encode_chunked=req.has_header('Transfer-encoding'))
+            except OSError as err: # timeout error
+>               raise URLError(err)
+E               urllib.error.URLError: <urlopen error [Errno 111] Connection refused>
+
+usr/lib/python3.12/urllib/request.py:1347: URLError
+
+During handling of the above exception, another exception occurred:
+
+start_app = None
+
+    def test_process_endpoint_receiver_extracts_structured_payload(start_app):
+        """The receiver agent is supposed to extract structured JSON from the
+        incoming text. Check that distinctive fields flow through to the
+        processor's summary."""
+        payload = {
+            "text": (
+                "Incoming A2A message envelope: "
+                "{ 'source': 'sensor-7', 'severity': 'critical', "
+                "'data': 'temperature exceeded 95C in rack-B' }"
+            )
+        }
+        try:
+            status, body = _post_json("/api/process", payload, timeout=PROCESS_REQUEST_TIMEOUT_SEC)
+        except (urllib.error.URLError, TimeoutError) as e:
+>           pytest.fail(f"HTTP request to /api/process failed: {e}")
+E           Failed: HTTP request to /api/process failed: <urlopen error [Errno 111] Connection refused>
+
+tests/test_final_state.py:97: Failed
+___________________ test_process_endpoint_rejects_empty_text ___________________
+
+self = <urllib.request.HTTPHandler object at 0xfd4227ded3a0>
+http_class = <class 'http.client.HTTPConnection'>
+req = <urllib.request.Request object at 0xfd4227ad77a0>, http_conn_args = {}
+host = 'localhost:3000'
+h = <http.client.HTTPConnection object at 0xfd4227ad66f0>
+headers = {'Connection': 'close', 'Content-Length': '12', 'Content-Type': 'application/json', 'Host': 'localhost:3000', ...}
+
+    def do_open(self, http_class, req, **http_conn_args):
+        """Return an HTTPResponse object for the request, using http_class.
+    
+        http_class must implement the HTTPConnection API from http.client.
+        """
+        host = req.host
+        if not host:
+            raise URLError('no host given')
+    
+        # will parse host:port
+        h = http_class(host, timeout=req.timeout, **http_conn_args)
+        h.set_debuglevel(self._debuglevel)
+    
+        headers = dict(req.unredirected_hdrs)
+        headers.update({k: v for k, v in req.headers.items()
+                        if k not in headers})
+    
+        # TODO(jhylton): Should this be redesigned to handle
+        # persistent connections?
+    
+        # We want to make an HTTP/1.1 request, but the addinfourl
+        # class isn't prepared to deal with a persistent connection.
+        # It will try to read all remaining data from the socket,
+        # which will block while the server waits for the next request.
+        # So make sure the connection gets closed after the (only)
+        # request.
+        headers["Connection"] = "close"
+        headers = {name.title(): val for name, val in headers.items()}
+    
+        if req._tunnel_host:
+            tunnel_headers = {}
+            proxy_auth_hdr = "Proxy-Authorization"
+            if proxy_auth_hdr in headers:
+                tunnel_headers[proxy_auth_hdr] = headers[proxy_auth_hdr]
+                # Proxy-Authorization should not be sent to origin
+                # server.
+                del headers[proxy_auth_hdr]
+            h.set_tunnel(req._tunnel_host, headers=tunnel_headers)
+    
+        try:
+            try:
+>               h.request(req.get_method(), req.selector, req.data, headers,
+                          encode_chunked=req.has_header('Transfer-encoding'))
+
+usr/lib/python3.12/urllib/request.py:1344: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/lib/python3.12/http/client.py:1356: in request
+    self._send_request(method, url, body, headers, encode_chunked)
+usr/lib/python3.12/http/client.py:1402: in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+usr/lib/python3.12/http/client.py:1351: in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+usr/lib/python3.12/http/client.py:1111: in _send_output
+    self.send(msg)
+usr/lib/python3.12/http/client.py:1055: in send
+    self.connect()
+usr/lib/python3.12/http/client.py:1021: in connect
+    self.sock = self._create_connection(
+usr/lib/python3.12/socket.py:852: in create_connection
+    raise exceptions[0]
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+address = ('localhost', 3000), timeout = 45, source_address = None
+
+    def create_connection(address, timeout=_GLOBAL_DEFAULT_TIMEOUT,
+                          source_address=None, *, all_errors=False):
+        """Connect to *address* and return the socket object.
+    
+        Convenience function.  Connect to *address* (a 2-tuple ``(host,
+        port)``) and return the socket object.  Passing the optional
+        *timeout* parameter will set the timeout on the socket instance
+        before attempting to connect.  If no *timeout* is supplied, the
+        global default timeout setting returned by :func:`getdefaulttimeout`
+        is used.  If *source_address* is set it must be a tuple of (host, port)
+        for the socket to bind as a source address before making the connection.
+        A host of '' or port 0 tells the OS to use the default. When a connection
+        cannot be created, raises the last error if *all_errors* is False,
+        and an ExceptionGroup of all errors if *all_errors* is True.
+        """
+    
+        host, port = address
+        exceptions = []
+        for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+            af, socktype, proto, canonname, sa = res
+            sock = None
+            try:
+                sock = socket(af, socktype, proto)
+                if timeout is not _GLOBAL_DEFAULT_TIMEOUT:
+                    sock.settimeout(timeout)
+                if source_address:
+                    sock.bind(source_address)
+>               sock.connect(sa)
+E               ConnectionRefusedError: [Errno 111] Connection refused
+
+usr/lib/python3.12/socket.py:837: ConnectionRefusedError
+
+During handling of the above exception, another exception occurred:
+
+start_app = None
+
+    def test_process_endpoint_rejects_empty_text(start_app):
+        """Malformed / empty input should not 500 — endpoint should stay up."""
+        try:
+>           status, _ = _post_json("/api/process", {"text": ""}, timeout=PROCESS_REQUEST_TIMEOUT_SEC)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_final_state.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_final_state.py:31: in _post_json
+    with urllib.request.urlopen(req, timeout=timeout) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:215: in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:515: in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:532: in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+usr/lib/python3.12/urllib/request.py:492: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+usr/lib/python3.12/urllib/request.py:1373: in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <urllib.request.HTTPHandler object at 0xfd4227ded3a0>
+http_class = <class 'http.client.HTTPConnection'>
+req = <urllib.request.Request object at 0xfd4227ad77a0>, http_conn_args = {}
+host = 'localhost:3000'
+h = <http.client.HTTPConnection object at 0xfd4227ad66f0>
+headers = {'Connection': 'close', 'Content-Length': '12', 'Content-Type': 'application/json', 'Host': 'localhost:3000', ...}
+
+    def do_open(self, http_class, req, **http_conn_args):
+        """Return an HTTPResponse object for the request, using http_class.
+    
+        http_class must implement the HTTPConnection API from http.client.
+        """
+        host = req.host
+        if not host:
+            raise URLError('no host given')
+    
+        # will parse host:port
+        h = http_class(host, timeout=req.timeout, **http_conn_args)
+        h.set_debuglevel(self._debuglevel)
+    
+        headers = dict(req.unredirected_hdrs)
+        headers.update({k: v for k, v in req.headers.items()
+                        if k not in headers})
+    
+        # TODO(jhylton): Should this be redesigned to handle
+        # persistent connections?
+    
+        # We want to make an HTTP/1.1 request, but the addinfourl
+        # class isn't prepared to deal with a persistent connection.
+        # It will try to read all remaining data from the socket,
+        # which will block while the server waits for the next request.
+        # So make sure the connection gets closed after the (only)
+        # request.
+        headers["Connection"] = "close"
+        headers = {name.title(): val for name, val in headers.items()}
+    
+        if req._tunnel_host:
+            tunnel_headers = {}
+            proxy_auth_hdr = "Proxy-Authorization"
+            if proxy_auth_hdr in headers:
+                tunnel_headers[proxy_auth_hdr] = headers[proxy_auth_hdr]
+                # Proxy-Authorization should not be sent to origin
+                # server.
+                del headers[proxy_auth_hdr]
+            h.set_tunnel(req._tunnel_host, headers=tunnel_headers)
+    
+        try:
+            try:
+                h.request(req.get_method(), req.selector, req.data, headers,
+                          encode_chunked=req.has_header('Transfer-encoding'))
+            except OSError as err: # timeout error
+>               raise URLError(err)
+E               urllib.error.URLError: <urlopen error [Errno 111] Connection refused>
+
+usr/lib/python3.12/urllib/request.py:1347: URLError
+
+During handling of the above exception, another exception occurred:
+
+start_app = None
+
+    def test_process_endpoint_rejects_empty_text(start_app):
+        """Malformed / empty input should not 500 — endpoint should stay up."""
+        try:
+            status, _ = _post_json("/api/process", {"text": ""}, timeout=PROCESS_REQUEST_TIMEOUT_SEC)
+        except urllib.error.HTTPError as e:
+            # 4xx is acceptable; we just don't want crashes.
+            assert 400 <= e.code < 500, f"Empty input triggered server error {e.code}"
+            return
+        except (urllib.error.URLError, TimeoutError) as e:
+>           pytest.fail(f"Empty-input request failed at transport layer: {e}")
+E           Failed: Empty-input request failed at transport layer: <urlopen error [Errno 111] Connection refused>
+
+tests/test_final_state.py:118: Failed
+____________________ test_server_still_alive_after_requests ____________________
+
+start_app = None
+
+    def test_server_still_alive_after_requests(start_app):
+        """After handling the earlier requests, the server should still be listening."""
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(5)
+>           assert sock.connect_ex(('localhost', PORT)) == 0, \
+                f"Server no longer listening on port {PORT} after requests."
+E           AssertionError: Server no longer listening on port 3000 after requests.
+E           assert 111 == 0
+E            +  where 111 = <built-in method connect_ex of socket object at 0xfd4227418910>(('localhost', 3000))
+E            +    where <built-in method connect_ex of socket object at 0xfd4227418910> = <socket.socket fd=12, family=2, type=1, proto=0, laddr=('127.0.0.1', 41796)>.connect_ex
+
+tests/test_final_state.py:126: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_process_endpoint_basic - http.client.R...
+FAILED tests/test_final_state.py::test_process_endpoint_receiver_extracts_structured_payload
+FAILED tests/test_final_state.py::test_process_endpoint_rejects_empty_text - ...
+FAILED tests/test_final_state.py::test_server_still_alive_after_requests - As...
+============================== 4 failed in 2.01s ===============================

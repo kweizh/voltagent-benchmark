@@ -1,0 +1,41 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1777609757.880874,
+            "stop": 1777609758.905517
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_index_file_exists",
+                "status": "passed",
+                "duration": 0.00038045400287956,
+                "start": 1777609757.8850734,
+                "stop": 1777609757.8856285,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_db_file_created",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 1.0034026479697786,
+                "start": 1777609757.8857093,
+                "stop": 1777609758.9049573,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_db_file_created():\n        # Run the agent's script in the background and poll for the side-effect\n        # (memory.db). VoltAgent commonly leaks event-loop handles (signal\n        # handlers, async resources), so the script may never exit on its own\n        # even after the work is done. We don't require it to; we only require\n        # that the DB file appears, then we tear the process down.\n        if os.path.isfile(DB_FILE):\n            os.remove(DB_FILE)\n    \n        proc = subprocess.Popen(\n            [\"npx\", \"tsx\", \"index.ts\"],\n            cwd=PROJECT_DIR,\n            stdout=subprocess.PIPE,\n            stderr=subprocess.PIPE,\n            text=True,\n            preexec_fn=os.setsid,\n        )\n    \n        deadline = time.monotonic() + TSX_RUN_TIMEOUT_SEC\n        db_appeared = False\n        early_exit_code = None\n        try:\n            while time.monotonic() < deadline:\n                if os.path.isfile(DB_FILE) and os.path.getsize(DB_FILE) > 0:\n                    db_appeared = True\n                    break\n                rc = proc.poll()\n                if rc is not None:\n                    early_exit_code = rc\n                    break\n                time.sleep(0.5)\n        finally:\n            if proc.poll() is None:\n                try:\n                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)\n                    proc.wait(timeout=5)\n                except Exception:\n                    try:\n                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)\n                    except Exception:\n                        pass\n            try:\n                stdout, stderr = proc.communicate(timeout=5)\n            except subprocess.TimeoutExpired:\n                stdout, stderr = \"\", \"\"\n    \n        if not db_appeared:\n            if early_exit_code is not None and early_exit_code != 0:\n                pytest.fail(\n                    f\"index.ts exited with code {early_exit_code} before producing \"\n                    f\"{DB_FILE}.\\nstdout: {stdout!r}\\nstderr: {stderr!r}\"\n                )\n>           pytest.fail(\n                f\"Database file {DB_FILE} was not created within \"\n                f\"{TSX_RUN_TIMEOUT_SEC}s.\\nstdout: {stdout!r}\\nstderr: {stderr!r}\"\n            )\nE           Failed: Database file /home/user/agent-app/memory.db was not created within 90s.\nE           stdout: ''\nE           stderr: ''\n\ntests/test_final_state.py:76: Failed",
+                "message": "The test failed in the call phase due to an exception"
+            }
+        ]
+    }
+}

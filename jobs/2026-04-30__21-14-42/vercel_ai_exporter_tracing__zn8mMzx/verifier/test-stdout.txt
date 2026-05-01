@@ -1,0 +1,106 @@
+downloading uv 0.9.7 aarch64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 16ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 4 items
+
+tests/test_final_state.py ..FF                                           [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_npm_start_executes_successfully _____________________
+
+    def test_npm_start_executes_successfully():
+        """Priority 1: Run the script and verify it produces output.log.
+    
+        The agent's script typically initializes an OTel tracer/SDK that holds
+        Node's event loop open beyond the work we actually care about. Run in
+        the background and poll for the side-effect (output.log being written
+        or refreshed); tear the process down once it lands.
+        """
+        prior_mtime = os.path.getmtime(LOG_FILE) if os.path.isfile(LOG_FILE) else 0.0
+    
+        proc = subprocess.Popen(
+            ["npm", "start"],
+            cwd=PROJECT_DIR,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            preexec_fn=os.setsid,
+        )
+    
+        deadline = time.monotonic() + NPM_START_TIMEOUT_SEC
+        side_effect_seen = False
+        early_exit_code = None
+        try:
+            while time.monotonic() < deadline:
+                if os.path.isfile(LOG_FILE):
+                    mtime = os.path.getmtime(LOG_FILE)
+                    size = os.path.getsize(LOG_FILE)
+                    if mtime > prior_mtime and size > 0:
+                        side_effect_seen = True
+                        time.sleep(1.0)
+                        break
+                rc = proc.poll()
+                if rc is not None:
+                    early_exit_code = rc
+                    break
+                time.sleep(0.5)
+        finally:
+            if proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    proc.wait(timeout=5)
+                except Exception:
+                    try:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    except Exception:
+                        pass
+            try:
+                stdout, stderr = proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                stdout, stderr = "", ""
+    
+        if not side_effect_seen:
+            if early_exit_code is not None and early_exit_code != 0:
+>               pytest.fail(
+                    f"'npm start' exited with code {early_exit_code} before "
+                    f"producing {LOG_FILE}.\nstdout: {stdout!r}\nstderr: {stderr!r}"
+                )
+E               Failed: 'npm start' exited with code 1 before producing /home/user/app/output.log.
+E               stdout: '\n> voltagent-tracing-app@1.0.0 start\n> ts-node index.ts\n\n'
+E               stderr: "/home/user/app/node_modules/ts-node/src/index.ts:859\n    return new TSError(diagnosticText, diagnosticCodes, diagnostics);\n           ^\nTSError: ⨯ Unable to compile TypeScript:\nindex.ts(34,7): error TS2322: Type 'OpenAIChatLanguageModel' is not assignable to type 'LanguageModel'.\n  Type 'OpenAIChatLanguageModel' is not assignable to type '(string & {}) | LanguageModelV3 | LanguageModelV2'.\n    Property 'supportedUrls' is missing in type 'OpenAIChatLanguageModel' but required in type 'LanguageModelV2'.\n\n    at createTSError (/home/user/app/node_modules/ts-node/src/index.ts:859:12)\n    at reportTSError (/home/user/app/node_modules/ts-node/src/index.ts:863:19)\n    at getOutput (/home/user/app/node_modules/ts-node/src/index.ts:1077:36)\n    at Object.compile (/home/user/app/node_modules/ts-node/src/index.ts:1433:41)\n    at Module.m._compile (/home/user/app/node_modules/ts-node/src/index.ts:1617:30)\n    at node:internal/modules/cjs/loader:1943:10\n    at Object.require.extensions.<computed> [as .ts] (/home/user/app/node_modules/ts-node/src/index.ts:1621:12)\n    at Module.load (node:internal/modules/cjs/loader:1533:32)\n    at Module._load (node:internal/modules/cjs/loader:1335:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19) {\n  diagnosticCodes: [ 2322 ]\n}\n"
+
+tests/test_final_state.py:91: Failed
+____________________________ test_output_log_exists ____________________________
+
+    def test_output_log_exists():
+        """Priority 3: Check if the log file was created."""
+>       assert os.path.isfile(LOG_FILE), f"Log file not found at {LOG_FILE}"
+E       AssertionError: Log file not found at /home/user/app/output.log
+E       assert False
+E        +  where False = <function isfile at 0xf35e72bd0220>('/home/user/app/output.log')
+E        +    where <function isfile at 0xf35e72bd0220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:103: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_telemetry_packages_installed
+PASSED tests/test_final_state.py::test_index_ts_contains_tracing_config
+FAILED tests/test_final_state.py::test_npm_start_executes_successfully - Fail...
+FAILED tests/test_final_state.py::test_output_log_exists - AssertionError: Lo...
+========================= 2 failed, 2 passed in 1.54s ==========================

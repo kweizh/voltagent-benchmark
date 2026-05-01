@@ -1,0 +1,44 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 0,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1777609546.741292,
+            "stop": 1777609548.3452892
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_math_server_tool_usage",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 1.075071398052387,
+                "start": 1777609546.746276,
+                "stop": 1777609547.832402,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_math_server_tool_usage():\n        \"\"\"Priority 3: Verify the agent uses the math server's tool to multiply.\"\"\"\n    \n        test_script_path = os.path.join(PROJECT_DIR, \"test_math.js\")\n        with open(test_script_path, \"w\") as f:\n            f.write(\"\"\"\n    import { runAgent } from './index.js';\n    \n    async function main() {\n      const result = await runAgent(\"What is 15 multiplied by 4?\");\n      if (result.includes(\"60\")) {\n        console.log(\"MATH_SUCCESS\");\n      } else {\n        console.error(\"Result was:\", result);\n        process.exit(1);\n      }\n    }\n    main().then(\n      () => process.exit(0),\n      (e) => { console.error(e); process.exit(1); },\n    );\n    \"\"\")\n    \n        result = _run_node(\"test_math.js\")\n    \n>       assert result.returncode == 0, f\"Math test script failed: {result.stderr}\"\nE       AssertionError: Math test script failed: file:///home/user/app/node_modules/@voltagent/core/dist/index.mjs:15282\nE             return this.llm.getModelIdentifier(this.model);\nE                             ^\nE         \nE         TypeError: Cannot read properties of undefined (reading 'getModelIdentifier')\nE             at Agent.getModelName (file:///home/user/app/node_modules/@voltagent/core/dist/index.mjs:15282:21)\nE             at new Agent (file:///home/user/app/node_modules/@voltagent/core/dist/index.mjs:12655:25)\nE             at file:///home/user/app/index.js:58:15\nE             at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\nE         \nE         Node.js v20.20.2\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['node', 'test_math.js'], returncode=1, stdout='', stderr=\"file:///home/user/app/node_modules/@v...dex.js:58:15\\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\\n\\nNode.js v20.20.2\\n\").returncode\n\ntests/test_final_state.py:57: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_string_server_tool_usage",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.511242505046539,
+                "start": 1777609547.8325493,
+                "stop": 1777609548.3450887,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_string_server_tool_usage():\n        \"\"\"Priority 3: Verify the agent uses the string server's tool to reverse a string.\"\"\"\n    \n        test_script_path = os.path.join(PROJECT_DIR, \"test_string.js\")\n        with open(test_script_path, \"w\") as f:\n            f.write(\"\"\"\n    import { runAgent } from './index.js';\n    \n    async function main() {\n      const result = await runAgent(\"Reverse the string 'voltagent'\");\n      if (result.toLowerCase().includes(\"tnegatlov\")) {\n        console.log(\"STRING_SUCCESS\");\n      } else {\n        console.error(\"Result was:\", result);\n        process.exit(1);\n      }\n    }\n    main().then(\n      () => process.exit(0),\n      (e) => { console.error(e); process.exit(1); },\n    );\n    \"\"\")\n    \n        result = _run_node(\"test_string.js\")\n    \n>       assert result.returncode == 0, f\"String test script failed: {result.stderr}\"\nE       AssertionError: String test script failed: file:///home/user/app/node_modules/@voltagent/core/dist/index.mjs:15282\nE             return this.llm.getModelIdentifier(this.model);\nE                             ^\nE         \nE         TypeError: Cannot read properties of undefined (reading 'getModelIdentifier')\nE             at Agent.getModelName (file:///home/user/app/node_modules/@voltagent/core/dist/index.mjs:15282:21)\nE             at new Agent (file:///home/user/app/node_modules/@voltagent/core/dist/index.mjs:12655:25)\nE             at file:///home/user/app/index.js:58:15\nE             at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\nE         \nE         Node.js v20.20.2\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['node', 'test_string.js'], returncode=1, stdout='', stderr=\"file:///home/user/app/node_modules/...dex.js:58:15\\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\\n\\nNode.js v20.20.2\\n\").returncode\n\ntests/test_final_state.py:86: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

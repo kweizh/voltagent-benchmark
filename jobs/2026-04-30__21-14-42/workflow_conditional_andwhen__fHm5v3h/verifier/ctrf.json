@@ -1,0 +1,38 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1777609240.4995642,
+            "stop": 1777609242.680239
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_workflow_conditional_logic",
+                "status": "passed",
+                "duration": 2.1736649409867823,
+                "start": 1777609240.505068,
+                "stop": 1777609242.6791546,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_uses_andwhen",
+                "status": "passed",
+                "duration": 0.0004907450056634843,
+                "start": 1777609242.6793547,
+                "stop": 1777609242.68001,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}
